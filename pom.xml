@@ -10,12 +10,14 @@
     </parent>
     <groupId>com.springframework</groupId>
     <artifactId>pet-clinic-tutorial</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.1</version>
     <name>pet-clinic-tutorial</name>
     <description>tutorial project pet-clinic</description>
 
     <properties>
         <java.version>11</java.version>
+        <timestamp>${maven.build.timestamp}</timestamp>
+        <maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
     </properties>
 
     <dependencies>
@@ -68,6 +70,23 @@
                 </exclusion>
             </exclusions>
         </dependency>
+
+
+        <!--    Swagger    -->
+
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>2.9.2</version>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>2.9.2</version>
+        </dependency>
+
+        <!--   End Swagger    -->
+
     </dependencies>
 
     <build>
@@ -76,7 +95,20 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
+            <plugin>
+                <groupId>br.com.ingenieux</groupId>
+                <artifactId>beanstalk-maven-plugin</artifactId>
+                <version>1.5.0</version>
+                <configuration>
+                    <applicationName>pet-clinic-tutorial</applicationName>
+                    <s3Bucket>pet-clinic-s3bucket</s3Bucket>
+                    <s3Key>${project.basedir}/target${project.build.finalName}.jar</s3Key>
+                    <cnamePrefix>PetClinicTutorial-env</cnamePrefix>
+                    <environmentName>PetClinicTutorial-env</environmentName>
+                    <environmentRef>PetClinicTutorial-env</environmentRef>
+                    <solutionStack>64bit Amazon Linux 2016.09 v2.4.0 running Java 8</solutionStack>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
-
 </project>
