@@ -6,7 +6,7 @@ import java.time.LocalDate;
  * Created by sousaJ on 24/08/2020
  * in package - com.springframework.petclinictutorial.model
  **/
-public class Pet {
+public class Pet extends BaseEntity {
     private PetType petType;
     private Owner  owner;
     private LocalDate birthDate;
