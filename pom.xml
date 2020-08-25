@@ -49,7 +49,7 @@
         </plugins>
     </build>
     <scm>
-        <developerConnection>scm:git:https://github.com/josousa82/pet-clinic-tutorial.git</developerConnection>
+        <developerConnection>scm:git:git@github.com:josousa82/pet-clinic-tutorial.git</developerConnection>
       <tag>TestRelease</tag>
   </scm>
 </project>
