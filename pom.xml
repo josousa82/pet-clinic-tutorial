@@ -8,7 +8,8 @@
         <module>pet-clinic-web</module>
     </modules>
 
-    <packaging>pom</packaging>
+    <name>pet-clinic-tutorial</name>
+    <description>Tutorial for the pet clinic project with a few changes</description>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -20,13 +21,17 @@
     <groupId>com.springframework</groupId>
     <artifactId>pet-clinic-tutorial</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>pet-clinic-tutorial</name>
-    <description>tutorial project pet-clinic</description>
+    <packaging>pom</packaging>
+
 
     <properties>
-        <java.version>11</java.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <timestamp>${maven.build.timestamp}</timestamp>
         <maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
+        <java.version>11</java.version>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
     </properties>
 
     <build>
