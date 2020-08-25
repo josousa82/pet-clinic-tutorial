@@ -6,4 +6,4 @@ orbs:
 workflows:
   maven_test:
     jobs:
-      - maven release:prepare -Dresume=false  # checkout, build, test, and upload test results
+      - maven/test # checkout, build, test, and upload test results
