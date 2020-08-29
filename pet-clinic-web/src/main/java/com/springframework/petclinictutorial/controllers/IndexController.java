@@ -16,7 +16,7 @@ public class IndexController {
     @Value("${welcome.message}")
     private String message;
 
-    @GetMapping("")
+    @GetMapping("/")
     public String getString(Model model){
         model.addAttribute("message", message);
         return "index";
