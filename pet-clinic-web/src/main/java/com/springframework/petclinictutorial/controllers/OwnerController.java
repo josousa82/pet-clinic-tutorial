@@ -10,12 +10,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * in package - com.springframework.petclinictutorial.controllers
  **/
 @Controller
-@RequestMapping("/vets")
-public class VetController {
+@RequestMapping("/owners")
+public class OwnerController {
 
     @RequestMapping(value = {"", "/","/index", "/index.html"}, method = RequestMethod.GET)
-    public String listVets(Model model){
-
-        return "vets/index";
+    public String listOwners(Model model){
+        return "owners/index";
     }
 }
