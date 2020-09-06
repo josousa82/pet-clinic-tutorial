@@ -1,6 +1,7 @@
 package com.springframework.petclinictutorial.bootstrap;
 
 import com.springframework.petclinictutorial.model.Owner;
+import com.springframework.petclinictutorial.model.Person;
 import com.springframework.petclinictutorial.model.Vet;
 import com.springframework.petclinictutorial.services.OwnerService;
 import com.springframework.petclinictutorial.services.VetService;
@@ -27,36 +28,50 @@ public class DataLoader implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         Owner owner1 = new Owner();
-        owner1.setId(1L);
+        owner1.setId(0L);
         owner1.setFirstName("Michael");
         owner1.setLastName("Weston");
 
         ownerService.save(owner1);
 
         Owner owner2 = new Owner();
-        owner1.setId(2L);
+        owner1.setId(1L);
         owner1.setFirstName("Fiona");
         owner1.setLastName("Glenanne");
-
         ownerService.save(owner2);
+
+        Owner owner3 = new Owner();
+        owner1.setId(2L);
+        owner1.setFirstName("tes");
+        owner1.setLastName("g");
+
+
+        ownerService.save(owner3);
 
         System.out.println("Loaded owners...");
 
+        ownerService.findAll().stream()
+                .map(Person::getFirstName)
+                .forEach(System.out::println);
+
         Vet vet1 = new Vet();
-        vet1.setId(1L);
+        vet1.setId(5L);
         vet1.setFirstName("Sam");
         vet1.setLastName("Axe");
 
         vetService.save(vet1);
 
         Vet vet2 = new Vet();
-        vet1.setId(2L);
+        vet1.setId(6L);
         vet1.setFirstName("Jessie");
         vet1.setLastName("Porter");
 
         vetService.save(vet2);
 
         System.out.println("Loaded vets...");
+        vetService.findAll().stream()
+                .map(Person::getFirstName)
+                .forEach(System.out::println);
     }
 
     public static void main(String[] args) {

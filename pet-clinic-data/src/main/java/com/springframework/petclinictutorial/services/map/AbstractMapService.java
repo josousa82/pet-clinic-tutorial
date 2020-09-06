@@ -1,9 +1,6 @@
 package com.springframework.petclinictutorial.services.map;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by sousaJ on 29/08/2020
@@ -22,7 +19,10 @@ public abstract class AbstractMapService<T, ID> {
     }
 
     T save(ID id, T object){
-        map.put(id, object);
+        if(Objects.nonNull(object)){
+            map.put(id, object);
+        }else
+            throw new RuntimeException("Object cannot be null");
         return object;
     }
 
