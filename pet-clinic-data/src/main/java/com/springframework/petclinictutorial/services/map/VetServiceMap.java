@@ -2,6 +2,7 @@ package com.springframework.petclinictutorial.services.map;
 
 import com.springframework.petclinictutorial.model.Vet;
 import com.springframework.petclinictutorial.services.VetService;
+import org.springframework.stereotype.Service;
 
 import java.util.Set;
 
@@ -9,6 +10,7 @@ import java.util.Set;
  * Created by sousaJ on 29/08/2020
  * in package - com.springframework.petclinictutorial.services.map
  **/
+@Service
 public class VetServiceMap extends AbstractMapService<Vet, Long> implements VetService {
     @Override
     public Set<Vet> findAll() {
