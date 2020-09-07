@@ -6,6 +6,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.Map;
+
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 
@@ -24,8 +26,8 @@ public class RestOwnerController {
     }
 
     @RequestMapping(value = "/getOwners", method = GET)
-    public ResponseEntity getOwnersList(Model model) throws NullPointerException{
+    public ResponseEntity<Map<String, Object>> getOwnersList(Model model) throws NullPointerException{
         model.addAttribute("ownersList",ownerService.findAll() );
-        return ResponseEntity.ok(model.asMap().values());
+        return ResponseEntity.ok(model.asMap());
     }
 }
