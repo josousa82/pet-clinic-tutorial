@@ -16,8 +16,10 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class DataLoader implements CommandLineRunner {
+
     private final OwnerService ownerService;
     private final VetService vetService;
+
 
     @Autowired
     public DataLoader(OwnerService ownerService, VetService vetService) {
@@ -27,23 +29,26 @@ public class DataLoader implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
+
+
+
         Owner owner1 = new Owner();
-        owner1.setId(0L);
+        owner1.setId(1L);
         owner1.setFirstName("Michael");
         owner1.setLastName("Weston");
-
         ownerService.save(owner1);
 
+
         Owner owner2 = new Owner();
-        owner1.setId(1L);
-        owner1.setFirstName("Fiona");
-        owner1.setLastName("Glenanne");
+        owner2.setId(2L);
+        owner2.setFirstName("Fiona");
+        owner2.setLastName("Glenanne");
         ownerService.save(owner2);
 
         Owner owner3 = new Owner();
-        owner1.setId(2L);
-        owner1.setFirstName("tes");
-        owner1.setLastName("g");
+        owner3.setId(3L);
+        owner3.setFirstName("tes");
+        owner3.setLastName("g");
 
 
         ownerService.save(owner3);
@@ -55,16 +60,14 @@ public class DataLoader implements CommandLineRunner {
                 .forEach(System.out::println);
 
         Vet vet1 = new Vet();
-        vet1.setId(5L);
         vet1.setFirstName("Sam");
         vet1.setLastName("Axe");
 
         vetService.save(vet1);
 
         Vet vet2 = new Vet();
-        vet1.setId(6L);
-        vet1.setFirstName("Jessie");
-        vet1.setLastName("Porter");
+        vet2.setFirstName("Jessie");
+        vet2.setLastName("Porter");
 
         vetService.save(vet2);
 
@@ -74,7 +77,4 @@ public class DataLoader implements CommandLineRunner {
                 .forEach(System.out::println);
     }
 
-    public static void main(String[] args) {
-
-    }
 }
