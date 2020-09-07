@@ -75,6 +75,8 @@ public class DataLoader implements CommandLineRunner {
         vetService.findAll().stream()
                 .map(Person::getFirstName)
                 .forEach(System.out::println);
+
+        System.out.println(System.getProperty("AWS_ACCESS_KEY_ID"));
     }
 
 }
