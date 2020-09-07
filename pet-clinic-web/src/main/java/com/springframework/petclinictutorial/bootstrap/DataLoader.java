@@ -76,7 +76,6 @@ public class DataLoader implements CommandLineRunner {
                 .map(Person::getFirstName)
                 .forEach(System.out::println);
 
-        System.out.println(System.getProperty("AWS_ACCESS_KEY_ID"));
     }
 
 }
