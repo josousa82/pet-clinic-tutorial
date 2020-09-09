@@ -1,10 +1,3 @@
-
-
-  # pet-clinic-tutorial
-  
-
-
-
 # Pet Clinic Project Spring Tutorial with a few Changes
 
 Pet Clinic project from Spring Boot Tutorials recreated with some extras from Spring Guru course
