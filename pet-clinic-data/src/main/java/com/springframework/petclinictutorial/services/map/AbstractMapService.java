@@ -10,10 +10,10 @@ import java.util.*;
  **/
 public abstract class AbstractMapService<T extends BaseEntity, ID extends Long> {
 
-    protected Map<Long, T> map = new LinkedHashMap<>();
+    protected Map<Long, T> map = new HashMap<>();
 
     Set<T> findAll(){
-        return new LinkedHashSet<>(map.values());
+        return new HashSet<>(map.values());
     }
 
     T findById(ID id){
