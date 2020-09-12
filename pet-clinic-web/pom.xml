@@ -21,10 +21,7 @@
         <wro4j.version>1.9.0</wro4j.version>
         <webjars-popper.version>1.16.0</webjars-popper.version>
         <webjars-font-awsome.version>5.14.0</webjars-font-awsome.version>
-        <ff4j.version>1.8.9</ff4j.version>
-
     </properties>
-
 
     <dependencies>
 
@@ -66,6 +63,7 @@
             <version>${webjars-font-awsome.version}</version>
         </dependency>
         <!-- end of webjars -->
+
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
