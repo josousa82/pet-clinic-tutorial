@@ -4,6 +4,7 @@ import com.springframework.petclinictutorial.model.Owner;
 import com.springframework.petclinictutorial.services.OwnerService;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -15,7 +16,7 @@ public class OwnerServiceMap extends AbstractMapService<Owner, Long> implements 
 
     @Override
     public Set<Owner> findAll() {
-        return super.findAll();
+        return new HashSet<>(super.findAll());
     }
 
     @Override

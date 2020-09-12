@@ -4,6 +4,7 @@ import com.springframework.petclinictutorial.model.PetType;
 import com.springframework.petclinictutorial.services.PetTypeService;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -14,7 +15,7 @@ import java.util.Set;
 public class PetTypeMapService extends AbstractMapService<PetType, Long> implements PetTypeService {
     @Override
     public Set<PetType> findAll() {
-        return super.findAll();
+        return new HashSet<>(super.findAll());
     }
 
     @Override
