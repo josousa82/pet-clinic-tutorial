@@ -7,4 +7,5 @@ package com.springframework.petclinictutorial.model;
 
 public class Owner extends Person {
 
+
 }

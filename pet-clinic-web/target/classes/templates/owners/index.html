@@ -1,22 +1,22 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"><head>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body},'owners')}">
     <meta charset="UTF-8">
     <title>Owners index page</title>
 </head>
 <body>
 <!--/*thymesVar id= "owner" type ="com.springframework.petclinictutorial.model.Owner"*/-->
-    <h1 th:text="'Owners Page'">Owners Page</h1>
-    <table>
+    <h2 id="owners" th:text="'Owners'">Owners Page</h2>
+    <table class="table table-striped">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>First Name</th>
-                <th>Last Name</th>
+                <th style="width: 150px">Name</th>
+                <th style="width: 200px">Address</th>
+                <th style="width: 120px">Telephone</th>
             </tr>
         </thead>
         <tbody>
             <tr th:each="owner : ${owners}">
-                <td th:text="${owner.id}">1</td>
+                <td th:text="${owner.firstName + ' ' + owner.lastName}">1</td>
                 <td th:text="${owner.firstName}">Joe</td>
                 <td th:text="${owner.lastName}">Buck</td>
             </tr>
