@@ -7,7 +7,7 @@ import java.time.LocalDate;
  * in package - com.springframework.petclinictutorial.model
  **/
 public class PetType extends BaseEntity {
-    private String name;
+    private String type;
     private Owner owner;
     private LocalDate birthDate;
 
@@ -27,11 +27,11 @@ public class PetType extends BaseEntity {
         this.birthDate = birthDate;
     }
 
-    public String getName() {
-        return name;
+    public String getType() {
+        return type;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setType(String type) {
+        this.type = type;
     }
 }

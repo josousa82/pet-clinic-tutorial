@@ -2,8 +2,10 @@ package com.springframework.petclinictutorial.bootstrap;
 
 import com.springframework.petclinictutorial.model.Owner;
 import com.springframework.petclinictutorial.model.Person;
+import com.springframework.petclinictutorial.model.PetType;
 import com.springframework.petclinictutorial.model.Vet;
 import com.springframework.petclinictutorial.services.OwnerService;
+import com.springframework.petclinictutorial.services.PetTypeService;
 import com.springframework.petclinictutorial.services.VetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -19,17 +21,33 @@ public class DataLoader implements CommandLineRunner {
 
     private final OwnerService ownerService;
     private final VetService vetService;
+    private final PetTypeService petTypeService;
 
 
     @Autowired
-    public DataLoader(OwnerService ownerService, VetService vetService) {
+    public DataLoader(OwnerService ownerService, VetService vetService, PetTypeService petTypeService) {
         this.ownerService = ownerService;
         this.vetService = vetService;
+        this.petTypeService = petTypeService;
     }
 
     @Override
     public void run(String... args) throws Exception {
 
+        PetType dog = new PetType();
+        dog.setType("Dog");
+        PetType savedDogPetType = petTypeService.save(dog);
+
+
+        PetType cat = new PetType();
+        cat.setType("Cat");
+        PetType savedCatPetType = petTypeService.save(cat);
+
+        petTypeService.findAll().stream()
+                .map(PetType::getType)
+                .forEach(System.out::println);
+
+        System.out.println("Loaded PetTypes...");
 
 
         Owner owner1 = new Owner();
@@ -53,11 +71,12 @@ public class DataLoader implements CommandLineRunner {
 
         ownerService.save(owner3);
 
-        System.out.println("Loaded owners...");
-
         ownerService.findAll().stream()
                 .map(Person::getFirstName)
                 .forEach(System.out::println);
+
+        System.out.println("Loaded owners...");
+
 
         Vet vet1 = new Vet();
         vet1.setFirstName("Sam");
@@ -71,10 +90,12 @@ public class DataLoader implements CommandLineRunner {
 
         vetService.save(vet2);
 
-        System.out.println("Loaded vets...");
         vetService.findAll().stream()
                 .map(Person::getFirstName)
                 .forEach(System.out::println);
+
+        System.out.println("Loaded vets...");
+
 
     }
 
