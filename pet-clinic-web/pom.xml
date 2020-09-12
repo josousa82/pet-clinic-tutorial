@@ -21,9 +21,13 @@
         <wro4j.version>1.9.0</wro4j.version>
         <webjars-popper.version>1.16.0</webjars-popper.version>
         <webjars-font-awsome.version>5.14.0</webjars-font-awsome.version>
+        <ff4j.version>1.8.9</ff4j.version>
 
     </properties>
+
+
     <dependencies>
+
         <dependency>
             <artifactId>pet-clinic-data</artifactId>
             <groupId>com.springframework</groupId>
@@ -110,6 +114,12 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.ff4j</groupId>
+            <artifactId>ff4j-web</artifactId>
+            <version>1.8.9</version>
+            <scope>compile</scope>
         </dependency>
         <!--   End Swagger    -->
     </dependencies>
