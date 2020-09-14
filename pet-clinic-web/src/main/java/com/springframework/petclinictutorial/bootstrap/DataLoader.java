@@ -1,15 +1,14 @@
 package com.springframework.petclinictutorial.bootstrap;
 
-import com.springframework.petclinictutorial.model.Owner;
-import com.springframework.petclinictutorial.model.Person;
-import com.springframework.petclinictutorial.model.PetType;
-import com.springframework.petclinictutorial.model.Vet;
+import com.springframework.petclinictutorial.model.*;
 import com.springframework.petclinictutorial.services.OwnerService;
 import com.springframework.petclinictutorial.services.PetTypeService;
 import com.springframework.petclinictutorial.services.VetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
+
+import java.time.LocalDate;
 
 /**
  * Created by sousaJ on 06/09/2020
@@ -54,6 +53,17 @@ public class DataLoader implements CommandLineRunner {
         owner1.setId(1L);
         owner1.setFirstName("Michael");
         owner1.setLastName("Weston");
+        owner1.setAddress("owner 1 address");
+        owner1.setCity("wonderland");
+        owner1.setTelephone("1234569");
+
+        Pet mikePet = new Pet();
+        mikePet.setName("Rosco");
+        mikePet.setPetType(savedDogPetType);
+        mikePet.setBirthDate(LocalDate.now());
+        mikePet.setOwner(owner1);
+        owner1.getPets().add(mikePet);
+
         ownerService.save(owner1);
 
 
@@ -61,12 +71,33 @@ public class DataLoader implements CommandLineRunner {
         owner2.setId(2L);
         owner2.setFirstName("Fiona");
         owner2.setLastName("Glenanne");
+        owner2.setAddress("owner 2 address");
+        owner2.setCity("wonderland escape");
+        owner2.setTelephone("123456789");
+
+        Pet fionaCat = new Pet();
+        fionaCat.setName("Cat");
+        fionaCat.setPetType(savedCatPetType);
+        fionaCat.setBirthDate(LocalDate.now());
+        fionaCat.setOwner(owner2);
+        owner2.getPets().add(fionaCat);
         ownerService.save(owner2);
 
         Owner owner3 = new Owner();
         owner3.setId(3L);
-        owner3.setFirstName("tes");
-        owner3.setLastName("g");
+        owner3.setFirstName("owner 3");
+        owner3.setLastName(" the 3rd owner  ");
+        owner2.setAddress("owner 3 address");
+        owner2.setCity("this doesnt live in wonderland");
+        owner2.setTelephone("123456789");
+
+        Pet owner3Pet = new Pet();
+        owner3Pet.setName("Kitty");
+        owner3Pet.setPetType(savedCatPetType);
+        owner3Pet.setBirthDate(LocalDate.now());
+        owner3Pet.setOwner(owner3);
+        owner3.getPets().add(owner3Pet);
+        ownerService.save(owner3);
 
 
         ownerService.save(owner3);
