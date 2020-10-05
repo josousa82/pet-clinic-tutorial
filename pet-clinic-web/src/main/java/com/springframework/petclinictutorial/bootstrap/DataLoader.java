@@ -1,10 +1,7 @@
 package com.springframework.petclinictutorial.bootstrap;
 
 import com.springframework.petclinictutorial.model.*;
-import com.springframework.petclinictutorial.services.OwnerService;
-import com.springframework.petclinictutorial.services.PetTypeService;
-import com.springframework.petclinictutorial.services.SpecialityService;
-import com.springframework.petclinictutorial.services.VetService;
+import com.springframework.petclinictutorial.services.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -22,17 +19,19 @@ public class DataLoader implements CommandLineRunner {
     private final VetService vetService;
     private final PetTypeService petTypeService;
     private final SpecialityService specialityService;
+    private final VisitService visitService;
 
-    public DataLoader(OwnerService ownerService, VetService vetService, PetTypeService petTypeService, SpecialityService specialityService) {
+    public DataLoader(OwnerService ownerService, VetService vetService, PetTypeService petTypeService, SpecialityService specialityService, VisitService visitService) {
         this.ownerService = ownerService;
         this.vetService = vetService;
         this.petTypeService = petTypeService;
         this.specialityService = specialityService;
+        this.visitService = visitService;
     }
 
 
     @Override
-    public void run(String... args) throws Exception {
+    public void run(String... args) {
         int count = petTypeService.findAll().size();
         if(count == 0)
             loadData();
@@ -47,6 +46,12 @@ public class DataLoader implements CommandLineRunner {
         PetType cat = new PetType();
         cat.setName("Cat");
         PetType savedCatPetType = petTypeService.save(cat);
+
+//        peService.findAll().stream()
+//                .map(PetType::getName)
+//                .forEach(System.out::println);
+
+        System.out.println("Loaded Pet...");
 
         Specialty radiology = new Specialty();
         radiology.setDescription("Radiology");
@@ -117,8 +122,12 @@ public class DataLoader implements CommandLineRunner {
         owner3.getPets().add(owner3Pet);
         ownerService.save(owner3);
 
+        Visit catVisit  = new Visit();
+        catVisit.setPet(owner3Pet);
+        catVisit.setDate(LocalDate.now());
+        catVisit.setDescription("kitty sneezing");
+        visitService. save(catVisit);
 
-        ownerService.save(owner3);
 
         ownerService.findAll().stream()
                 .map(Person::getFirstName)

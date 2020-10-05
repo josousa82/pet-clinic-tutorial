@@ -1,7 +1,6 @@
 package com.springframework.petclinictutorial.services.map;
 
 import com.springframework.petclinictutorial.model.Owner;
-import com.springframework.petclinictutorial.model.Pet;
 import com.springframework.petclinictutorial.services.OwnerService;
 import com.springframework.petclinictutorial.services.PetService;
 import com.springframework.petclinictutorial.services.PetTypeService;
@@ -56,7 +55,7 @@ public class OwnerMapService extends AbstractMapService<Owner, Long> implements 
                     }
 
                     if (Objects.isNull(pet.getId())){
-                        Pet savedPet = petService.save(pet);
+                        petService.save(pet);
                     }
                 });
             }

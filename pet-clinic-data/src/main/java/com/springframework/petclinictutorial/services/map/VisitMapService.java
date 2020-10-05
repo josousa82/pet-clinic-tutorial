@@ -1,8 +1,8 @@
 package com.springframework.petclinictutorial.services.map;
 
 import com.springframework.petclinictutorial.model.Visit;
-import com.springframework.petclinictutorial.services.PetService;
 import com.springframework.petclinictutorial.services.VisitService;
+import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
 import java.util.Objects;
@@ -12,13 +12,9 @@ import java.util.Set;
  * Created by sousaJ on 05/10/2020
  * in package - com.springframework.petclinictutorial.services.map
  **/
+@Service
 public class VisitMapService extends AbstractMapService<Visit, Long> implements VisitService {
 
-    private  final PetService petService;
-
-    public VisitMapService( PetService petService) {
-        this.petService = petService;
-    }
 
     @Override
     public Set<Visit> findAll() {

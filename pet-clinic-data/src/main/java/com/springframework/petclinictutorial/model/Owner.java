@@ -50,7 +50,7 @@ public class Owner extends Person {
     }
 
     public Set<Pet> getPets() {
-        return new HashSet<>(pets);
+        return pets;
     }
 
     public void setPets(Set<Pet> pets) {
