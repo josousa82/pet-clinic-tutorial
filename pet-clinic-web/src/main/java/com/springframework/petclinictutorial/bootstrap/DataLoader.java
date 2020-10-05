@@ -40,12 +40,12 @@ public class DataLoader implements CommandLineRunner {
 
     private void loadData() {
         PetType dog = new PetType();
-        dog.setType("Dog");
+        dog.setName("Dog");
         PetType savedDogPetType = petTypeService.save(dog);
 
 
         PetType cat = new PetType();
-        cat.setType("Cat");
+        cat.setName("Cat");
         PetType savedCatPetType = petTypeService.save(cat);
 
         Specialty radiology = new Specialty();
@@ -61,7 +61,7 @@ public class DataLoader implements CommandLineRunner {
         Specialty savedDentistry = specialityService.save(dentistry);
 
         petTypeService.findAll().stream()
-                .map(PetType::getType)
+                .map(PetType::getName)
                 .forEach(System.out::println);
 
         System.out.println("Loaded PetTypes...");
@@ -145,7 +145,7 @@ public class DataLoader implements CommandLineRunner {
     }
     public void printMaps(){
         petTypeService.findAll().stream()
-                .map(PetType::getType)
+                .map(PetType::getName)
                 .forEach(System.out::println);
 
         vetService.findAll().stream()

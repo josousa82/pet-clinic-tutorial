@@ -1,6 +1,7 @@
 /Users/sousaJ/Desktop/projects/Spring-Guru/pet-clinic-tutorial/pet-clinic-data/src/main/java/com/springframework/petclinictutorial/model/Owner.java
 /Users/sousaJ/Desktop/projects/Spring-Guru/pet-clinic-tutorial/pet-clinic-data/src/main/java/com/springframework/petclinictutorial/services/PetTypeService.java
 /Users/sousaJ/Desktop/projects/Spring-Guru/pet-clinic-tutorial/pet-clinic-data/src/main/java/com/springframework/petclinictutorial/model/Specialty.java
+/Users/sousaJ/Desktop/projects/Spring-Guru/pet-clinic-tutorial/pet-clinic-data/src/main/java/com/springframework/petclinictutorial/model/jpa/BaseEntity.java
 /Users/sousaJ/Desktop/projects/Spring-Guru/pet-clinic-tutorial/pet-clinic-data/src/main/java/com/springframework/petclinictutorial/model/Vet.java
 /Users/sousaJ/Desktop/projects/Spring-Guru/pet-clinic-tutorial/pet-clinic-data/src/main/java/com/springframework/petclinictutorial/services/SpecialityService.java
 /Users/sousaJ/Desktop/projects/Spring-Guru/pet-clinic-tutorial/pet-clinic-data/src/main/java/com/springframework/petclinictutorial/model/BaseEntity.java

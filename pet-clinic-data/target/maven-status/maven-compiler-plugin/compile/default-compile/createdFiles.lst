@@ -15,6 +15,7 @@ com/springframework/petclinictutorial/model/Vet.class
 com/springframework/petclinictutorial/model/Owner.class
 com/springframework/petclinictutorial/services/map/PetTypeMapService.class
 com/springframework/petclinictutorial/services/SpecialityService.class
+com/springframework/petclinictutorial/model/jpa/BaseEntity.class
 com/springframework/petclinictutorial/services/VetService.class
 com/springframework/petclinictutorial/services/CrudService.class
 com/springframework/petclinictutorial/services/PetService.class
