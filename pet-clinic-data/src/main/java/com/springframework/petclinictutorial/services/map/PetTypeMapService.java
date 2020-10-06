@@ -2,6 +2,7 @@ package com.springframework.petclinictutorial.services.map;
 
 import com.springframework.petclinictutorial.model.PetType;
 import com.springframework.petclinictutorial.services.PetTypeService;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
@@ -12,6 +13,7 @@ import java.util.Set;
  * in package - com.springframework.petclinictutorial.services.map
  **/
 @Service
+@Profile({"default", "map"})
 public class PetTypeMapService extends AbstractMapService<PetType, Long> implements PetTypeService {
     @Override
     public Set<PetType> findAll() {

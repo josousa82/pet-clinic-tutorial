@@ -4,6 +4,7 @@ import com.springframework.petclinictutorial.model.Owner;
 import com.springframework.petclinictutorial.services.OwnerService;
 import com.springframework.petclinictutorial.services.PetService;
 import com.springframework.petclinictutorial.services.PetTypeService;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import java.security.InvalidParameterException;
@@ -16,6 +17,7 @@ import java.util.Set;
  * in package - com.springframework.petclinictutorial.services.map
  **/
 @Service
+@Profile({"default", "map"})
 public class OwnerMapService extends AbstractMapService<Owner, Long> implements OwnerService {
 
     private final PetTypeService petTypeService;

@@ -1,12 +1,12 @@
 package com.springframework.petclinictutorial.controllers.restControllers;
 
+import com.springframework.petclinictutorial.model.Owner;
 import com.springframework.petclinictutorial.services.OwnerService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.Map;
+import java.util.Set;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
@@ -26,8 +26,7 @@ public class RestOwnerController {
     }
 
     @RequestMapping(value = "/getOwners", method = GET)
-    public ResponseEntity<Map<String, Object>> getOwnersList(Model model) throws NullPointerException{
-        model.addAttribute("ownersList",ownerService.findAll() );
-        return ResponseEntity.ok(model.asMap());
+    public ResponseEntity<Set<Owner>> getOwnersList() throws NullPointerException{
+        return ResponseEntity.ok( ownerService.findAll());
     }
 }
