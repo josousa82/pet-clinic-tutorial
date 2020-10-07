@@ -1,7 +1,7 @@
 package com.springframework.petclinictutorial.model.repositories;
 
 import com.springframework.petclinictutorial.model.Owner;
-import com.springframework.petclinictutorial.services.CrudService;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
@@ -12,7 +12,7 @@ import java.util.Optional;
  **/
 
 @Repository
-public interface OwnerRepository extends CrudService<Owner, Long> {
+public interface OwnerRepository extends CrudRepository<Owner, Long> {
     Optional<Owner> findByLastName(String lastName);
 
 }

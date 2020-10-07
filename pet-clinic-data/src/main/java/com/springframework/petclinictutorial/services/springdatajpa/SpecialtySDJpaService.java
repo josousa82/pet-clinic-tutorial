@@ -15,7 +15,7 @@ import java.util.Set;
  **/
 
 @Service
-@Profile("sprindatajpa")
+@Profile("springdatajpa")
 public class SpecialtySDJpaService implements SpecialityService {
 
     private final SpecialtyRepository specialtyRepository;

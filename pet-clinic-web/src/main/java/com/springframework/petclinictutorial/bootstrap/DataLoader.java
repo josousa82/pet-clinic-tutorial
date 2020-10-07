@@ -3,6 +3,7 @@ package com.springframework.petclinictutorial.bootstrap;
 import com.springframework.petclinictutorial.model.*;
 import com.springframework.petclinictutorial.services.*;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
@@ -13,20 +14,21 @@ import java.time.LocalDate;
  **/
 
 @Component
+@Profile("springdatajpa")
 public class DataLoader implements CommandLineRunner {
 
     private final OwnerService ownerService;
     private final VetService vetService;
     private final PetTypeService petTypeService;
-    private final SpecialityService specialityService;
     private final VisitService visitService;
+    private final SpecialityService specialityService;
 
-    public DataLoader(OwnerService ownerService, VetService vetService, PetTypeService petTypeService, SpecialityService specialityService, VisitService visitService) {
+    public DataLoader(OwnerService ownerService, VetService vetService, PetTypeService petTypeService, VisitService visitService, SpecialityService specialityService) {
         this.ownerService = ownerService;
         this.vetService = vetService;
         this.petTypeService = petTypeService;
-        this.specialityService = specialityService;
         this.visitService = visitService;
+        this.specialityService = specialityService;
     }
 
 
@@ -42,14 +44,9 @@ public class DataLoader implements CommandLineRunner {
         dog.setName("Dog");
         PetType savedDogPetType = petTypeService.save(dog);
 
-
         PetType cat = new PetType();
         cat.setName("Cat");
         PetType savedCatPetType = petTypeService.save(cat);
-
-//        peService.findAll().stream()
-//                .map(PetType::getName)
-//                .forEach(System.out::println);
 
         System.out.println("Loaded Pet...");
 
@@ -65,9 +62,6 @@ public class DataLoader implements CommandLineRunner {
         radiology.setDescription("Dentistry");
         Specialty savedDentistry = specialityService.save(dentistry);
 
-        petTypeService.findAll().stream()
-                .map(PetType::getName)
-                .forEach(System.out::println);
 
         System.out.println("Loaded PetTypes...");
 
@@ -126,12 +120,9 @@ public class DataLoader implements CommandLineRunner {
         catVisit.setPet(owner3Pet);
         catVisit.setDate(LocalDate.now());
         catVisit.setDescription("kitty sneezing");
-        visitService. save(catVisit);
+        catVisit.setId(owner3Pet.getId());
+//        visitService.save(catVisit);
 
-
-        ownerService.findAll().stream()
-                .map(Person::getFirstName)
-                .forEach(System.out::println);
 
         System.out.println("Loaded owners...");
 
@@ -151,6 +142,8 @@ public class DataLoader implements CommandLineRunner {
 
 
         System.out.println("Loaded vets...");
+
+        printMaps();
     }
     public void printMaps(){
         petTypeService.findAll().stream()
@@ -160,6 +153,16 @@ public class DataLoader implements CommandLineRunner {
         vetService.findAll().stream()
                 .map(Person::getFirstName)
                 .forEach(System.out::println);
+
+        ownerService.findAll().stream()
+                .map(Person::getFirstName)
+                .forEach(System.out::println);
+
+        petTypeService.findAll().stream()
+                .map(PetType::getName)
+                .forEach(System.out::println);
+
+
     }
 
 }
