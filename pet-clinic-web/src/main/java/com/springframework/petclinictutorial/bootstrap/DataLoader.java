@@ -2,6 +2,7 @@ package com.springframework.petclinictutorial.bootstrap;
 
 import com.springframework.petclinictutorial.model.*;
 import com.springframework.petclinictutorial.services.*;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
@@ -15,6 +16,7 @@ import java.time.LocalDate;
 
 @Component
 @Profile("springdatajpa")
+@Slf4j
 public class DataLoader implements CommandLineRunner {
 
     private final OwnerService ownerService;
@@ -24,6 +26,7 @@ public class DataLoader implements CommandLineRunner {
     private final SpecialityService specialityService;
 
     public DataLoader(OwnerService ownerService, VetService vetService, PetTypeService petTypeService, VisitService visitService, SpecialityService specialityService) {
+        log.error("boostrap class constructor");
         this.ownerService = ownerService;
         this.vetService = vetService;
         this.petTypeService = petTypeService;
