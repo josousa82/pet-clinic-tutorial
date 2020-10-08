@@ -1,9 +1,0 @@
-com/springframework/petclinictutorial/controllers/OwnerController.class
-com/springframework/petclinictutorial/controllers/VetController.class
-com/springframework/petclinictutorial/controllers/restControllers/RestOwnerController.class
-com/springframework/petclinictutorial/bootstrap/DataLoader.class
-com/springframework/petclinictutorial/PetClinicTutorialApplication.class
-com/springframework/petclinictutorial/configurations/CORSConfig.class
-com/springframework/petclinictutorial/controllers/IndexController.class
-com/springframework/petclinictutorial/configurations/SwaggerConfig.class
-com/springframework/petclinictutorial/controllers/restControllers/RestVetController.class
