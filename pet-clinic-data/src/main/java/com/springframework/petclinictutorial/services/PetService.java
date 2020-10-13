@@ -7,4 +7,5 @@ import com.springframework.petclinictutorial.model.Pet;
  * in package - com.springframework.petclinictutorial.services
  **/
 public interface PetService extends CrudService<Pet, Long>{
+
 }
