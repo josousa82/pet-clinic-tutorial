@@ -19,7 +19,8 @@ jobs:
             - v1-dependencies
 
       - run: mvn dependency:go-offline
-
+      - run: mvn test
+      - run: mvn install
       - run:
           name: Save test results
           command: |
@@ -32,10 +33,6 @@ jobs:
 
       - store_artifacts:
           path: ~/junit
-
-
-      - run: mvn test
-      - run: mvn install
 
       - save-cache:
           paths:
