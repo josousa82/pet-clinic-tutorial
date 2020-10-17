@@ -12,6 +12,9 @@ jobs:
 
     steps: 
     - checkout
+    -
+    - store_test_results:
+          path: test-results
 
     - restore_cache:
         keys:
