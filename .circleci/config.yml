@@ -21,18 +21,17 @@ jobs:
       - run: mvn dependency:go-offline
       - run: mvn test
       - run: mvn install
-      - run:
-          name: Save test results
-          command: |
-            mkdir -p ~/junit/
-            find . -type f -regex ".*/build/test-results/.*xml" -exec cp {} ~/junit/ \;
-          when: always
+#          name: Save test results
+#          command: |
+#            mkdir -p ~/junit/
+#            find . -type f -regex ".*/build/test-results/.*xml" -exec cp {} ~/junit/ \;
+#          when: always
 
       - store_test_results:
-          path: ~/junit
+          path: target/surefire-reports
 
-      - store_artifacts:
-          path: ~/junit
+#      - store_artifacts:
+#          path: ~/junit
 
       - save-cache:
           paths:
