@@ -1,5 +1,6 @@
 package com.springframework.petclinictutorial.services.map;
 
+import com.google.common.collect.MoreCollectors;
 import com.springframework.petclinictutorial.model.Owner;
 import com.springframework.petclinictutorial.services.OwnerService;
 import com.springframework.petclinictutorial.services.PetService;
@@ -74,6 +75,10 @@ public class OwnerMapService extends AbstractMapService<Owner, Long> implements 
 
     @Override
     public Owner findByLastName(String lastName) {
-        return null;
+        return super.map.values()
+                .stream()
+                .filter((Owner owner) -> Objects.nonNull(owner.getLastName()))
+                .filter(owner -> owner.getLastName().equals(lastName))
+                .collect(MoreCollectors.onlyElement());
     }
 }
