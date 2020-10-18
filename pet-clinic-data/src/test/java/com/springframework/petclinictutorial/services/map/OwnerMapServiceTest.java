@@ -76,7 +76,12 @@ class OwnerMapServiceTest {
                 () -> ownerMapService.save(null));
         assertEquals("Owner must not be null", ex.getMessage());
     }
-
+    @Test
+    void saveNoId() {
+        Owner owner3 = new Owner();
+        Owner owner = ownerMapService.save(owner3);
+        Assertions.assertNotNull(owner);
+    }
 
     @Test
     void findById() {
