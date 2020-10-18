@@ -5,6 +5,7 @@ import com.springframework.petclinictutorial.model.Pet;
 import com.springframework.petclinictutorial.model.PetType;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.security.InvalidParameterException;
@@ -95,5 +96,11 @@ class OwnerMapServiceTest {
         owner1.setLastName("Sousa");
         Owner owner = ownerMapService.findByLastName("Sousa");
         assertEquals("Sousa", owner.getLastName());
+    }
+    @Test
+    @Disabled
+    void findByLastNameNotFound() {
+        Owner owner = ownerMapService.findByLastName("foo");
+        Assertions.assertNull(owner);
     }
 }
