@@ -7,7 +7,6 @@ import javax.persistence.MappedSuperclass;
  * Created by sousaJ on 24/08/2020
  * in package - com.springframework.petclinictutorial.model
  **/
-
 @MappedSuperclass
 public class Person  extends BaseEntity {
 

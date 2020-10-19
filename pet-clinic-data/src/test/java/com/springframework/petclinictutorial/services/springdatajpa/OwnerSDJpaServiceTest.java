@@ -2,8 +2,6 @@ package com.springframework.petclinictutorial.services.springdatajpa;
 
 import com.springframework.petclinictutorial.model.Owner;
 import com.springframework.petclinictutorial.model.repositories.OwnerRepository;
-import com.springframework.petclinictutorial.model.repositories.PetRepository;
-import com.springframework.petclinictutorial.model.repositories.PetTypeRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -26,12 +24,6 @@ class OwnerSDJpaServiceTest {
 
     @Mock
     OwnerRepository ownerRepository;
-
-    @Mock
-    PetRepository petRepository;
-
-    @Mock
-    PetTypeRepository petTypeRepository;
 
     @InjectMocks
     OwnerSDJpaService service;
