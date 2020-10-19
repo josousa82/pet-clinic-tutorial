@@ -3,6 +3,7 @@ package com.springframework.petclinictutorial.model;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
@@ -14,6 +15,7 @@ import java.util.Set;
  * in package - com.springframework.petclinictutorial.model
  **/
 @Getter
+@Setter
 @Entity
 @Table
 @SuperBuilder(toBuilder = true)
