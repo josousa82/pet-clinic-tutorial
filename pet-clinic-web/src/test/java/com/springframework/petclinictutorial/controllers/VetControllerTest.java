@@ -38,18 +38,11 @@ class VetControllerTest {
 
     @BeforeEach
     void setUp() {
-        vet1 = new Vet();
-        vet1.setId(1L);
-
-        vet2 = new Vet();
-        vet2.setId(2L);
+        vet1 = Vet.builder().id(1L).build();
+        vet2 = Vet.builder().id(2L).build();
 
         vets = new HashSet<>();
 
-        vets.add(vet1);
-        vets.add(vet2);
-
-        vets = new HashSet<>();
         vets.add(vet1);
         vets.add(vet2);
 

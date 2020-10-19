@@ -36,15 +36,13 @@ class OwnerSDJpaServiceTest {
 
     @BeforeEach
     void setUp() {
-         owner1 = new Owner();
-         owner1.setId(1L);
-         owner1.setLastName(LAST_NAME);
+         owner1 = Owner.builder()
+         .id(1L)
+         .lastName(LAST_NAME)
+         .build();
 
-         owner2 = new Owner();
-         owner2.setId(2L);
-
-         owner3 = new Owner();
-         owner3.setId(3L);
+         owner2 = Owner.builder().id(2L).build();
+         owner3 = Owner.builder().id(3L).build();
 
          owners= new HashSet<>();
 

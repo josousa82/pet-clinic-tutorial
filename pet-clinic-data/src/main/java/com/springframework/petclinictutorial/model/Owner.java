@@ -1,5 +1,10 @@
 package com.springframework.petclinictutorial.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -8,9 +13,12 @@ import java.util.Set;
  * Created by sousaJ on 24/08/2020
  * in package - com.springframework.petclinictutorial.model
  **/
-
+@Getter
 @Entity
 @Table(name = "owners")
+@SuperBuilder(toBuilder = true)
+@NoArgsConstructor
+@AllArgsConstructor
 public class Owner extends Person {
 
     @Column(name = "address")

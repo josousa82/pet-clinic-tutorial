@@ -1,5 +1,10 @@
 package com.springframework.petclinictutorial.model;
 
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
+
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 
@@ -7,7 +12,10 @@ import javax.persistence.MappedSuperclass;
  * Created by sousaJ on 24/08/2020
  * in package - com.springframework.petclinictutorial.model
  **/
+@Getter
 @MappedSuperclass
+@NoArgsConstructor(access = AccessLevel.PACKAGE)
+@SuperBuilder(toBuilder = true)
 public class Person  extends BaseEntity {
 
     @Column(name = "first_name")
