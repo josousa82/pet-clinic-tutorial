@@ -1,8 +1,6 @@
 package com.springframework.petclinictutorial.model;
 
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 import javax.persistence.GeneratedValue;
@@ -16,20 +14,14 @@ import java.io.Serializable;
  * in package - com.springframework.petclinictutorial.model
  **/
 @Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @MappedSuperclass
-@NoArgsConstructor(access = AccessLevel.PACKAGE)
-@SuperBuilder(toBuilder = true)
 public class BaseEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 }

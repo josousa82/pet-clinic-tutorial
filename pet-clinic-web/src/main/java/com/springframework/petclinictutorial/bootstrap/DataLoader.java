@@ -15,7 +15,7 @@ import java.time.LocalDate;
  **/
 
 @Component
-@Profile("springdatajpa")
+@Profile({"springdatajpa", "default", "map"})
 @Slf4j
 public class DataLoader implements CommandLineRunner {
 
@@ -43,103 +43,96 @@ public class DataLoader implements CommandLineRunner {
     }
 
     private void loadData() {
-        PetType dog = new PetType();
-        dog.setName("Dog");
-        PetType savedDogPetType = petTypeService.save(dog);
+        PetType dog = PetType.builder().id(1L).name("Dog").build();
+        PetType cat = PetType.builder().id(2L).name("Cat").build();
 
-        PetType cat = new PetType();
-        cat.setName("Cat");
+        PetType savedDogPetType = petTypeService.save(dog);
         PetType savedCatPetType = petTypeService.save(cat);
 
         System.out.println("Loaded Pet...");
 
-        Specialty radiology = new Specialty();
-        radiology.setDescription("Radiology");
+        Specialty radiology = Specialty.builder().id(1L).description("Radiology").build();
+        Specialty surgery = Specialty.builder().id(2L).description("Surgery").build();
+
         Specialty savedRadiology = specialityService.save(radiology);
-
-        Specialty surgery = new Specialty();
-        radiology.setDescription("Surgery");
         Specialty savedSurgery = specialityService.save(surgery);
-
-        Specialty dentistry = new Specialty();
-        radiology.setDescription("Dentistry");
-        Specialty savedDentistry = specialityService.save(dentistry);
-
 
         System.out.println("Loaded PetTypes...");
 
 
-        Owner owner1 = new Owner();
-        owner1.setId(1L);
-        owner1.setFirstName("Michael");
-        owner1.setLastName("Weston");
-        owner1.setAddress("owner 1 address");
-        owner1.setCity("wonderland");
-        owner1.setTelephone("1234569");
-
         Pet mikePet = new Pet();
+        mikePet.setId(1L);
         mikePet.setName("Rosco");
         mikePet.setPetType(savedDogPetType);
         mikePet.setBirthDate(LocalDate.now());
+
+
+        Owner owner1 = Owner.builder().id(1L).firstName("Michael").lastName("Weston")
+                .address("owner 1 address").city("wonderland").telephone("1234569").build();
+
         mikePet.setOwner(owner1);
-        owner1.getPets().add(mikePet);
 
         ownerService.save(owner1);
+//        owner1.getPets().add(mikePet);
 
-
-        Owner owner2 = new Owner();
-        owner2.setId(2L);
-        owner2.setFirstName("Fiona");
-        owner2.setLastName("Glenanne");
-        owner2.setAddress("owner 2 address");
-        owner2.setCity("wonderland escape");
-        owner2.setTelephone("123456789");
-
-        Pet fionaCat = new Pet();
-        fionaCat.setName("Cat");
-        fionaCat.setPetType(savedCatPetType);
-        fionaCat.setBirthDate(LocalDate.now());
-        fionaCat.setOwner(owner2);
-        owner2.getPets().add(fionaCat);
-        ownerService.save(owner2);
-
-        Owner owner3 = new Owner();
-        owner3.setId(3L);
-        owner3.setFirstName("owner 3");
-        owner3.setLastName(" the 3rd owner  ");
-        owner2.setAddress("owner 3 address");
-        owner2.setCity("this doesnt live in wonderland");
-        owner2.setTelephone("123456789");
-
-        Pet owner3Pet = new Pet();
-        owner3Pet.setName("Kitty");
-        owner3Pet.setPetType(savedCatPetType);
-        owner3Pet.setBirthDate(LocalDate.now());
-        owner3Pet.setOwner(owner3);
-        owner3.getPets().add(owner3Pet);
-        ownerService.save(owner3);
-
-        Visit catVisit  = new Visit();
-        catVisit.setPet(owner3Pet);
-        catVisit.setDate(LocalDate.now());
-        catVisit.setDescription("kitty sneezing");
-        catVisit.setId(owner3Pet.getId());
-//        visitService.save(catVisit);
+//        Owner owner2 = new Owner();
+//        owner2.setId(2L);
+//        owner2.setFirstName("Fiona");
+//        owner2.setLastName("Glenanne");
+//        owner2.setAddress("owner 2 address");
+//        owner2.setCity("wonderland escape");
+//        owner2.setTelephone("123456789");
+//
+//        Pet fionaCat = new Pet();
+//        fionaCat.setName("Cat");
+//        fionaCat.setPetType(savedCatPetType);
+//        fionaCat.setBirthDate(LocalDate.now());
+//        fionaCat.setOwner(owner2);
+//        owner2.getPets().add(fionaCat);
+//        ownerService.save(owner2);
+//
+//        Owner owner3 = new Owner();
+//        owner3.setId(3L);
+//        owner3.setFirstName("owner 3");
+//        owner3.setLastName(" the 3rd owner  ");
+//        owner2.setAddress("owner 3 address");
+//        owner2.setCity("this doesnt live in wonderland");
+//        owner2.setTelephone("123456789");
+//
+//        Pet owner3Pet = new Pet();
+//        owner3Pet.setName("Kitty");
+//        owner3Pet.setPetType(savedCatPetType);
+//        owner3Pet.setBirthDate(LocalDate.now());
+//        owner3Pet.setOwner(owner3);
+//        owner3.getPets().add(owner3Pet);
+//        ownerService.save(owner3);
+//
+//        Visit catVisit  = new Visit();
+//        catVisit.setPet(owner3Pet);
+//        catVisit.setDate(LocalDate.now());
+//        catVisit.setDescription("kitty sneezing");
+//        catVisit.setId(owner3Pet.getId());
+////        visitService.save(catVisit);
 
 
         System.out.println("Loaded owners...");
 
-
-        Vet vet1 = new Vet();
-        vet1.setFirstName("Sam");
-        vet1.setLastName("Axe");
-        vet1.getSpecialties().add(savedRadiology);
+        Vet vet1 = Vet.builder()
+                .id(1L)
+                .firstName("Sam")
+                .lastName("Axe")
+                .specialty(savedRadiology)
+                .build();
+//        vet1.getSpecialties().add(savedRadiology);
         vetService.save(vet1);
 
-        Vet vet2 = new Vet();
-        vet2.setFirstName("Jessie");
-        vet2.setLastName("Porter");
-        vet2.getSpecialties().add(savedSurgery);
+        Vet vet2 = Vet.builder()
+                .id(2L)
+                .firstName("Jessie")
+                .lastName("Porter")
+                .specialty(savedSurgery)
+                .build();
+//        vet2.getSpecialties().add(savedSurgery);
         vetService.save(vet2);
 
 
@@ -165,6 +158,9 @@ public class DataLoader implements CommandLineRunner {
                 .map(PetType::getName)
                 .forEach(System.out::println);
 
+        vetService.findAll().stream()
+                .map(Vet::getFirstName)
+                .forEach(System.out::println);
 
     }
 

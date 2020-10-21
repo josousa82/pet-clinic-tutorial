@@ -6,6 +6,7 @@ import com.springframework.petclinictutorial.services.SpecialityService;
 import com.springframework.petclinictutorial.services.VetService;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashSet;
 import java.util.Objects;
@@ -27,7 +28,9 @@ public class VetMapService extends AbstractMapService<Vet, Long> implements VetS
 
     @Override
     public Set<Vet> findAll() {
-        return new HashSet<>(super.findAll());
+        Set<Vet> vets = new HashSet<>();
+        super.findAll().forEach(vets::add);
+        return vets;
     }
 
     @Override
@@ -46,19 +49,16 @@ public class VetMapService extends AbstractMapService<Vet, Long> implements VetS
 
     @Override
     public Vet findById(Long id) {
-
         return super.findById(id);
     }
 
     @Override
     public void deleteById(Long id) {
-
         super.deleteById(id);
     }
 
     @Override
     public void delete(Vet object) {
-
         super.delete(object);
     }
 

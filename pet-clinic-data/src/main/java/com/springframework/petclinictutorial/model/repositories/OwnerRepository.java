@@ -14,5 +14,4 @@ import java.util.Optional;
 @Repository
 public interface OwnerRepository extends CrudRepository<Owner, Long> {
     Optional<Owner> findByLastName(String lastName);
-
 }

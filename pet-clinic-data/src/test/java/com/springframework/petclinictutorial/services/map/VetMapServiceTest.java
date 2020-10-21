@@ -3,14 +3,19 @@ package com.springframework.petclinictutorial.services.map;
 import com.springframework.petclinictutorial.model.Specialty;
 import com.springframework.petclinictutorial.model.Vet;
 import com.springframework.petclinictutorial.services.SpecialityService;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.ArgumentMatchers.any;
 
 class VetMapServiceTest {
 
@@ -24,6 +29,7 @@ class VetMapServiceTest {
     @BeforeEach
     void setUp() {
         SpecialityService specialityService = new SpecialityMapService();
+
         specialties = new HashSet<>();
 
         Specialty specialty1 = Specialty.builder().id(1L).description("surgery").build();
@@ -34,23 +40,23 @@ class VetMapServiceTest {
 
         vetMapService = new VetMapService(specialityService);
 
-        vet1 = Vet.builder().id(1L).lastName("smith").specialties(specialties).build();
+        vet1 = Vet.builder().id(1L).lastName("smith").specialty(specialty1).build();
 
         vetMapService.save(vet1);
 
-        vet2 = Vet.builder().id(2L).specialties(specialties).build();
+        vet2 = Vet.builder().id(2L).specialty(specialty2).build();
 
         vetMapService.save(vet2);
 
-        vet3 = Vet.builder().id(3L).specialties(specialties).build();
+        vet3 = Vet.builder().id(3L).specialty(specialty2).build();
         vets = vetMapService.findAll();
     }
 
     @Test
     void findAll() {
-//        Set<Vet> vets = vetMapService.findAll();
         assertEquals(2, vets.size());
     }
+
 
     @Test
     void save() {

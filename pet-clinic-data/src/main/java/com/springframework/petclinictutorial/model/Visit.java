@@ -1,5 +1,7 @@
 package com.springframework.petclinictutorial.model;
 
+import lombok.*;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 
@@ -7,6 +9,11 @@ import java.time.LocalDate;
  * Created by sousaJ on 12/09/2020
  * in package - com.springframework.petclinictutorial.model
  **/
+@Setter
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 @Entity
 @Table(name = "visits")
 public class Visit extends BaseEntity {
@@ -24,25 +31,5 @@ public class Visit extends BaseEntity {
 
     public LocalDate getDate() {
         return date;
-    }
-
-    public void setDate(LocalDate date) {
-        this.date = date;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public Pet getPet() {
-        return pet;
-    }
-
-    public void setPet(Pet pet) {
-        this.pet = pet;
     }
 }
