@@ -1,7 +1,6 @@
 package com.springframework.petclinictutorial.controllers;
 
 import com.springframework.petclinictutorial.model.Vet;
-import com.springframework.petclinictutorial.model.repositories.VetRepository;
 import com.springframework.petclinictutorial.services.VetService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -10,7 +9,6 @@ import org.junit.jupiter.params.provider.ValueSource;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
@@ -23,14 +21,10 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @ExtendWith(MockitoExtension.class)
-//@SpringBootTest
 class VetControllerTest {
 
     @Mock
     VetService vetService;
-
-    @Mock
-    VetRepository vetRepository;
 
     @InjectMocks
     VetController vetController;
@@ -67,4 +61,5 @@ class VetControllerTest {
                 .andExpect(view().name("vets/index"))
                 .andExpect(model().attribute("vets", hasSize(2)));
     }
+
 }
