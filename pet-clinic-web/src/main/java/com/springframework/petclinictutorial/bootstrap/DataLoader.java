@@ -14,9 +14,9 @@ import java.time.LocalDate;
  * in package - com.springframework.petclinictutorial.bootstrap
  **/
 
+@Slf4j
 @Component
 @Profile({"springdatajpa", "default", "map"})
-@Slf4j
 public class DataLoader implements CommandLineRunner {
 
     private final OwnerService ownerService;
@@ -26,12 +26,11 @@ public class DataLoader implements CommandLineRunner {
     private final SpecialityService specialityService;
 
     public DataLoader(OwnerService ownerService, VetService vetService, PetTypeService petTypeService, VisitService visitService, SpecialityService specialityService) {
-        log.error("boostrap class constructor");
         this.ownerService = ownerService;
         this.vetService = vetService;
         this.petTypeService = petTypeService;
-        this.visitService = visitService;
         this.specialityService = specialityService;
+        this.visitService = visitService;
     }
 
 
@@ -43,123 +42,113 @@ public class DataLoader implements CommandLineRunner {
     }
 
     private void loadData() {
-        PetType dog = PetType.builder().id(1L).name("Dog").build();
-        PetType cat = PetType.builder().id(2L).name("Cat").build();
 
+        log.info("-------------> BOOTSTRAP DATA LOADING <-------------");
+
+        PetType dog = PetType.builder().name("Dog").build();
         PetType savedDogPetType = petTypeService.save(dog);
+
+        PetType cat = PetType.builder().name("Cat").build();
         PetType savedCatPetType = petTypeService.save(cat);
 
-        System.out.println("Loaded Pet...");
+        log.warn("-------------> Loaded PetTypes...");
 
-        Specialty radiology = Specialty.builder().id(1L).description("Radiology").build();
-        Specialty surgery = Specialty.builder().id(2L).description("Surgery").build();
-
+        Specialty radiology = Specialty.builder().description("Radiology").build();
         Specialty savedRadiology = specialityService.save(radiology);
+
+        Specialty surgery = Specialty.builder().description("Surgery").build();
         Specialty savedSurgery = specialityService.save(surgery);
 
-        System.out.println("Loaded PetTypes...");
+        Specialty dentistry = Specialty.builder().description("Dentistry").build();
+        Specialty savedDentistry = specialityService.save(dentistry);
+
+        log.warn("-------------> Loaded Specialities...");
+
+        Pet mikePet = Pet.builder().name("Rosco").petType(savedDogPetType).birthDate(LocalDate.now()).build();
+
+        Owner ownerMike = Owner.builder().firstName("Michael").lastName("Weston")
+                .address("owner 1 address").city("wonderland").telephone("1234569").pet(mikePet).build();
+
+        mikePet.setOwner(ownerMike);
+        ownerService.save(ownerMike);
+
+        log.warn("-------------> Saved Mike");
+
+        Pet fionaCat =Pet.builder().name("Cat").petType(savedCatPetType).birthDate(LocalDate.now()).build();
+        Owner fionaOwner = Owner.builder().firstName("Fiona").lastName("Glenanne")
+                .address("owner 2 address").city("wonderland escape").telephone("123456789").pet(fionaCat).build();
+
+        fionaCat.setOwner(fionaOwner);
+        ownerService.save(fionaOwner);
+
+        log.warn("-------------> Saved Fiona");
+
+        Pet josePet = Pet.builder().name("pipa").petType(savedCatPetType)
+                .birthDate(LocalDate.now()).build();
+
+        Owner joseOwner = Owner.builder().firstName("jose").lastName("rei")
+                .address("jose candy house").city("wonderland").telephone("123456789").pet(josePet).build();
+
+        ownerService.save(joseOwner);
+
+        log.warn("-------------> Saved Jose");
+
+        Visit fionaCatVisit  = Visit.builder().date(LocalDate.now()).description("kitty sneezing").pet(fionaCat).build();
+        visitService.save(fionaCatVisit);
+
+        log.warn("-------------> Saved fionaCatVisit");
+
+        Visit joseCatVisit  = Visit.builder().date(LocalDate.now()).description("kitty sneezing").pet(josePet).build();
+        visitService.save(joseCatVisit);
+
+        log.warn("-------------> Saved joseCatVisit");
+
+        Visit mikeDogVisit  = Visit.builder().date(LocalDate.now()).description("Dog sneezing").pet(mikePet).build();
+        visitService.save(mikeDogVisit);
+
+        log.warn("-------------> Saved mikeDogVisit");
+
+        log.warn("-------------> Loading vets");
+
+        Vet vetAxe = Vet.builder().id(1L).firstName("Sam").lastName("Axe").specialty(savedRadiology).build();
+        vetService.save(vetAxe);
+        log.warn("-------------> Loaded vetAxe");
+
+        Vet vetJessie = Vet.builder().id(2L).firstName("Jessie").lastName("Porter").specialty(savedSurgery).build();
+
+        vetAxe.addSpeciality(dentistry);
+        log.warn("-------------> Loaded vetJessie dentistry speciality");
+
+        vetService.save(vetJessie);
+
+        log.warn("-------------> Loaded vetJessie");
 
 
-        Pet mikePet = new Pet();
-        mikePet.setId(1L);
-        mikePet.setName("Rosco");
-        mikePet.setPetType(savedDogPetType);
-        mikePet.setBirthDate(LocalDate.now());
-
-
-        Owner owner1 = Owner.builder().id(1L).firstName("Michael").lastName("Weston")
-                .address("owner 1 address").city("wonderland").telephone("1234569").build();
-
-        mikePet.setOwner(owner1);
-
-        ownerService.save(owner1);
-//        owner1.getPets().add(mikePet);
-
-//        Owner owner2 = new Owner();
-//        owner2.setId(2L);
-//        owner2.setFirstName("Fiona");
-//        owner2.setLastName("Glenanne");
-//        owner2.setAddress("owner 2 address");
-//        owner2.setCity("wonderland escape");
-//        owner2.setTelephone("123456789");
-//
-//        Pet fionaCat = new Pet();
-//        fionaCat.setName("Cat");
-//        fionaCat.setPetType(savedCatPetType);
-//        fionaCat.setBirthDate(LocalDate.now());
-//        fionaCat.setOwner(owner2);
-//        owner2.getPets().add(fionaCat);
-//        ownerService.save(owner2);
-//
-//        Owner owner3 = new Owner();
-//        owner3.setId(3L);
-//        owner3.setFirstName("owner 3");
-//        owner3.setLastName(" the 3rd owner  ");
-//        owner2.setAddress("owner 3 address");
-//        owner2.setCity("this doesnt live in wonderland");
-//        owner2.setTelephone("123456789");
-//
-//        Pet owner3Pet = new Pet();
-//        owner3Pet.setName("Kitty");
-//        owner3Pet.setPetType(savedCatPetType);
-//        owner3Pet.setBirthDate(LocalDate.now());
-//        owner3Pet.setOwner(owner3);
-//        owner3.getPets().add(owner3Pet);
-//        ownerService.save(owner3);
-//
-//        Visit catVisit  = new Visit();
-//        catVisit.setPet(owner3Pet);
-//        catVisit.setDate(LocalDate.now());
-//        catVisit.setDescription("kitty sneezing");
-//        catVisit.setId(owner3Pet.getId());
-////        visitService.save(catVisit);
-
-
-        System.out.println("Loaded owners...");
-
-        Vet vet1 = Vet.builder()
-                .id(1L)
-                .firstName("Sam")
-                .lastName("Axe")
-                .specialty(savedRadiology)
-                .build();
-//        vet1.getSpecialties().add(savedRadiology);
-        vetService.save(vet1);
-
-        Vet vet2 = Vet.builder()
-                .id(2L)
-                .firstName("Jessie")
-                .lastName("Porter")
-                .specialty(savedSurgery)
-                .build();
-//        vet2.getSpecialties().add(savedSurgery);
-        vetService.save(vet2);
-
-
-
-        System.out.println("Loaded vets...");
+        log.info("-------------> DATA LOADED SUCCESSFULLY <-------------");
 
         printMaps();
     }
+
     public void printMaps(){
+
+        log.info("-------------> PETS LOADED");
         petTypeService.findAll().stream()
                 .map(PetType::getName)
                 .forEach(System.out::println);
 
+        log.info("-------------> Vets loaded");
         vetService.findAll().stream()
                 .map(Person::getFirstName)
                 .forEach(System.out::println);
 
+        log.info("-------------> Owners loaded");
         ownerService.findAll().stream()
                 .map(Person::getFirstName)
                 .forEach(System.out::println);
 
+        log.info("-------------> PetTypes loaded");
         petTypeService.findAll().stream()
                 .map(PetType::getName)
-                .forEach(System.out::println);
-
-        vetService.findAll().stream()
-                .map(Vet::getFirstName)
                 .forEach(System.out::println);
 
     }
