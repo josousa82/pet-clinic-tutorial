@@ -20,12 +20,15 @@ import java.util.Set;
 public class Owner extends Person {
 
     @Builder
-    public Owner(Long id, String firstName, String lastName, String address, String city, String telephone, Set<Pet> pets) {
+    public Owner(Long id, String firstName, String lastName, String address, String city, String telephone, Set<Pet> pets, Pet pet) {
         super(id, firstName, lastName);
         this.address = address;
         this.city = city;
         this.telephone = telephone;
-        this.pets = pets;
+        if(pets != null) {
+            this.pets = pets;
+        }
+        addPet(pet);
     }
 
     @Column(name = "address")
@@ -40,4 +43,7 @@ public class Owner extends Person {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
     private Set<Pet> pets = new HashSet<>();
 
+    public void addPet(Pet pet){
+        this.pets.add(pet);
+    }
 }
