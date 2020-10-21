@@ -1,11 +1,10 @@
 package com.springframework.petclinictutorial.model;
 
-import com.google.common.base.Objects;
 import lombok.*;
-import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -21,8 +20,13 @@ import java.util.Set;
 public class Vet extends Person {
 
     @Builder
-    public Vet(Long id, String firstName, String lastName, Specialty specialty) {
+    public Vet(Long id, String firstName, String lastName, Set<Specialty> specialties, Specialty specialty) {
         super(id, firstName, lastName);
+
+        if(Objects.isNull(specialties)){
+            this.specialties = new HashSet<>();
+        }
+
         addSpeciality(specialty);
     }
 
@@ -31,11 +35,7 @@ public class Vet extends Person {
                 inverseJoinColumns = @JoinColumn(name = "specialty_id"))
     private Set<Specialty> specialties = new HashSet<>();
 
-    public Set<Specialty> getSpecialties() {
-        return specialties;
-    }
-
-    private void addSpeciality(Specialty specialty){
+    public void addSpeciality(Specialty specialty){
         this.specialties.add(specialty);
     }
 }
