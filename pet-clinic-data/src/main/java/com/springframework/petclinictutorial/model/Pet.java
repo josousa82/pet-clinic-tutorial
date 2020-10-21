@@ -20,7 +20,6 @@ import java.util.Set;
 @Table(name = "pets")
 public class Pet extends BaseEntity {
 
-
     @Builder
     public Pet(Long id, String name, PetType petType, Owner owner, LocalDate birthDate, Set<Visit> visits, Visit visit) {
         super(id);
@@ -28,11 +27,10 @@ public class Pet extends BaseEntity {
         this.petType = petType;
         this.owner = owner;
         this.birthDate = birthDate;
-//        if(Objects.isNull(this.visits)){
-//            this.visits = new HashSet<>();
-//        }
-        this.visits = visits;
-        this.visits.add(visit);
+        if(Objects.isNull(visits)){
+            this.visits = new HashSet<>();
+        }
+        addVisit(visit);
     }
 
     @Column(name = "name")
@@ -53,43 +51,8 @@ public class Pet extends BaseEntity {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "pet")
     private Set<Visit> visits = new HashSet<>();
 
-//    public String getName() {
-//        return name;
-//    }
-//
-//    public void setName(String name) {
-//        this.name = name;
-//    }
-//
-//    public PetType getPetType() {
-//        return petType;
-//    }
-//
-//    public void setPetType(PetType petType) {
-//        this.petType = petType;
-//    }
-//
-//    public Owner getOwner() {
-//        return owner;
-//    }
-//
-//    public void setOwner(Owner owner) {
-//        this.owner = owner;
-//    }
-//
-//    public LocalDate getBirthDate() {
-//        return birthDate;
-//    }
-//
-//    public void setBirthDate(LocalDate birthDate) {
-//        this.birthDate = birthDate;
-//    }
-//
-//    public Set<Visit> getVisits() {
-//        return visits;
-//    }
-//
-//    public void setVisits(Set<Visit> visits) {
-//        this.visits = visits;
-//    }
+
+    public void addVisit(Visit visit){
+        this.visits.add(visit);
+    }
 }
