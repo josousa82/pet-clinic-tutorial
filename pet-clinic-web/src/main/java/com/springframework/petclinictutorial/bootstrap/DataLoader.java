@@ -45,28 +45,28 @@ public class DataLoader implements CommandLineRunner {
 
         log.info("-------------> BOOTSTRAP DATA LOADING <-------------");
 
-        PetType dog = PetType.builder().name("Dog").build();
+        PetType dog = PetType.builder().id(1L).name("Dog").build();
         PetType savedDogPetType = petTypeService.save(dog);
 
-        PetType cat = PetType.builder().name("Cat").build();
+        PetType cat = PetType.builder().id(2L).name("Cat").build();
         PetType savedCatPetType = petTypeService.save(cat);
 
         log.warn("-------------> Loaded PetTypes...");
 
-        Specialty radiology = Specialty.builder().description("Radiology").build();
+        Specialty radiology = Specialty.builder().id(1L).description("Radiology").build();
         Specialty savedRadiology = specialityService.save(radiology);
 
-        Specialty surgery = Specialty.builder().description("Surgery").build();
+        Specialty surgery = Specialty.builder().id(2L).description("Surgery").build();
         Specialty savedSurgery = specialityService.save(surgery);
 
-        Specialty dentistry = Specialty.builder().description("Dentistry").build();
+        Specialty dentistry = Specialty.builder().id(3L).description("Dentistry").build();
         Specialty savedDentistry = specialityService.save(dentistry);
 
         log.warn("-------------> Loaded Specialities...");
 
-        Pet mikePet = Pet.builder().name("Rosco").petType(savedDogPetType).birthDate(LocalDate.now()).build();
+        Pet mikePet = Pet.builder().id(1L).name("Rosco").petType(savedDogPetType).birthDate(LocalDate.now()).build();
 
-        Owner ownerMike = Owner.builder().firstName("Michael").lastName("Weston")
+        Owner ownerMike = Owner.builder().id(1L).firstName("Michael").lastName("Weston")
                 .address("owner 1 address").city("wonderland").telephone("1234569").pet(mikePet).build();
 
         mikePet.setOwner(ownerMike);
@@ -74,8 +74,8 @@ public class DataLoader implements CommandLineRunner {
 
         log.warn("-------------> Saved Mike");
 
-        Pet fionaCat =Pet.builder().name("Cat").petType(savedCatPetType).birthDate(LocalDate.now()).build();
-        Owner fionaOwner = Owner.builder().firstName("Fiona").lastName("Glenanne")
+        Pet fionaCat =Pet.builder().id(2L).name("Cat").petType(savedCatPetType).birthDate(LocalDate.now()).build();
+        Owner fionaOwner = Owner.builder().id(2L).firstName("Fiona").lastName("Glenanne")
                 .address("owner 2 address").city("wonderland escape").telephone("123456789").pet(fionaCat).build();
 
         fionaCat.setOwner(fionaOwner);
@@ -83,27 +83,27 @@ public class DataLoader implements CommandLineRunner {
 
         log.warn("-------------> Saved Fiona");
 
-        Pet josePet = Pet.builder().name("pipa").petType(savedCatPetType)
+        Pet josePet = Pet.builder().id(3L).name("pipa").petType(savedCatPetType)
                 .birthDate(LocalDate.now()).build();
 
-        Owner joseOwner = Owner.builder().firstName("jose").lastName("rei")
+        Owner joseOwner = Owner.builder().id(3L).firstName("jose").lastName("rei")
                 .address("jose candy house").city("wonderland").telephone("123456789").pet(josePet).build();
-
+        josePet.setOwner(joseOwner);
         ownerService.save(joseOwner);
 
         log.warn("-------------> Saved Jose");
 
-        Visit fionaCatVisit  = Visit.builder().date(LocalDate.now()).description("kitty sneezing").pet(fionaCat).build();
+        Visit fionaCatVisit  = Visit.builder().id(1L).date(LocalDate.now()).description("kitty sneezing").pet(fionaCat).build();
         visitService.save(fionaCatVisit);
 
         log.warn("-------------> Saved fionaCatVisit");
 
-        Visit joseCatVisit  = Visit.builder().date(LocalDate.now()).description("kitty sneezing").pet(josePet).build();
+        Visit joseCatVisit  = Visit.builder().id(2L).date(LocalDate.now()).description("kitty sneezing").pet(josePet).build();
         visitService.save(joseCatVisit);
 
         log.warn("-------------> Saved joseCatVisit");
 
-        Visit mikeDogVisit  = Visit.builder().date(LocalDate.now()).description("Dog sneezing").pet(mikePet).build();
+        Visit mikeDogVisit  = Visit.builder().id(3L).date(LocalDate.now()).description("Dog sneezing").pet(mikePet).build();
         visitService.save(mikeDogVisit);
 
         log.warn("-------------> Saved mikeDogVisit");

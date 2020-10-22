@@ -13,10 +13,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.security.InvalidParameterException;
 import java.util.Set;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
-@Disabled
 @ExtendWith(MockitoExtension.class)
 class OwnerMapServiceTest {
 
@@ -28,10 +26,14 @@ class OwnerMapServiceTest {
     void setUp() {
         ownerMapService = new OwnerMapService(new PetTypeMapService(), new PetMapService());
 
-        owner1 = Owner.builder().id(1L).build();
+        owner1 = Owner.builder().id(1L).pet(Pet.builder().id(1L).owner(owner1)
+                .petType(PetType.builder().id(1L).name("pet1").build()).build()).build();
+
         ownerMapService.save(owner1);
 
-        owner2 = Owner.builder().id(2L).build();
+        owner2 = Owner.builder().id(2L).pet(Pet.builder().id(2L).owner(owner2)
+                .petType(PetType.builder().id(2L).name("pet2").build()).build()).build();
+
         ownerMapService.save(owner2);
      }
 
@@ -57,17 +59,12 @@ class OwnerMapServiceTest {
 
     @Test
     void save() {
-        Pet pet = new Pet();
+        PetType petType = PetType.builder().id(1L).name("cat").build();
 
-        PetType petType = new PetType();
-        petType.setName("cat");
-        petType.setId(1L);
+        Pet pet = Pet.builder().id(3L).petType(petType).build();
 
-        pet.setPetType(petType);
+        Owner owner3 = Owner.builder().id(3L).pet(pet).build();
 
-        Owner owner3 = new Owner();
-        owner3.setId(3L);
-        owner3.getPets().add(pet);
 
         Owner owner = ownerMapService.save(owner3);
         assertTrue(owner.getPets().contains(pet));
@@ -75,6 +72,13 @@ class OwnerMapServiceTest {
 
         Set<Owner> owners = ownerMapService.findAll();
         assertEquals(3, owners.size());
+
+        owners.forEach( ownerSt -> {
+            ownerSt.getPets().forEach( p -> {
+                assertNotNull(p.getPetType());
+                assertNotNull(p.getPetType().getId());
+            });
+        });
         Exception ex = Assertions.assertThrows(InvalidParameterException.class,
                 () -> ownerMapService.save(null));
         assertEquals("Owner must not be null", ex.getMessage());
