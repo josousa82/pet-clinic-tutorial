@@ -1,3 +1,17 @@
 body{
     font-family: "montserratregular", sans-serif;
 }
+
+#main-navbar > ul > li.nav-item > a > span{
+    font-size: 1.25rem!important;
+    padding-top: inherit;
+}
+
+#main-navbar > ul > li.nav-item {
+
+}
+
+#main-navbar > ul > li.nav-item > a > i{
+    font-size: 1.25rem!important;
+}
+
