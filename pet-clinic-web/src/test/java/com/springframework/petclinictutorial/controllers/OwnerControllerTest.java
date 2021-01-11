@@ -13,8 +13,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 
 import static org.hamcrest.Matchers.*;
 import static org.mockito.ArgumentMatchers.anyLong;
@@ -75,13 +75,11 @@ class OwnerControllerTest {
     void findOwners() throws Exception {
         mockMvc.perform(get("/owners/find"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("not_implemented"));
-        verifyNoInteractions(ownerService);
+                .andExpect(view().name("owners/findOwners"));
     }
 
     @Test
     void getOwnerDetails() throws Exception {
-
         when(ownerService.findById(anyLong())).thenReturn(owner1);
         mockMvc.perform(get("/owners/1"))
                .andExpect(status().isOk())
@@ -89,4 +87,26 @@ class OwnerControllerTest {
         .andExpect(model().attribute("owner", hasProperty("id", is(1L))));
         verify(ownerService, times(1)).findById(anyLong());
     }
+
+    @Test
+    void processFindFormReturnMany() throws Exception{
+
+        when(ownerService.findAllByLastName(anyString())).thenReturn(List.of(owner1, owner2));
+        mockMvc.perform(get("/owners/owners"))
+               .andExpect(status().isOk())
+               .andExpect(view().name("owners/ownersList"))
+               .andExpect(model().attribute("selections", hasSize(2)));
+        verify(ownerService, times(1)).findAllByLastName(anyString());
+    }
+
+    @Test
+    void processFindFormReturnOne() throws Exception{
+        when(ownerService.findAllByLastName(anyString())).thenReturn(List.of(owner1));
+        mockMvc.perform(get("/owners/owners"))
+               .andExpect(status().is3xxRedirection())
+               .andExpect(view().name("redirect:/owners/1"));
+        verify(ownerService, times(1)).findAllByLastName(anyString());
+    }
+
+
 }
