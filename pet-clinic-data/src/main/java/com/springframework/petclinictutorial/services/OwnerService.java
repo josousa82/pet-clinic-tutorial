@@ -1,7 +1,8 @@
 package com.springframework.petclinictutorial.services;
 
 import com.springframework.petclinictutorial.model.Owner;
-import com.springframework.petclinictutorial.model.Pet;
+
+import java.util.List;
 
 /**
  * Created by sousaJ on 25/08/2020
@@ -9,4 +10,5 @@ import com.springframework.petclinictutorial.model.Pet;
  **/
 public interface OwnerService extends CrudService<Owner, Long>{
     Owner findByLastName(String lastName);
+    List<Owner> findAllByLastName(String lastName);
 }

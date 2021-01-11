@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.security.InvalidParameterException;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -80,5 +81,10 @@ public class OwnerMapService extends AbstractMapService<Owner, Long> implements 
                 .filter((Owner owner) -> Objects.nonNull(owner.getLastName()))
                 .filter(owner -> owner.getLastName().equalsIgnoreCase(lastName))
                 .collect(MoreCollectors.onlyElement());
+    }
+
+    @Override
+    public List<Owner> findAllByLastName(String anyString) {
+        return null;
     }
 }
