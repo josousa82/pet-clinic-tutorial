@@ -9,10 +9,7 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import java.security.InvalidParameterException;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by sousaJ on 29/08/2020
@@ -84,7 +81,7 @@ public class OwnerMapService extends AbstractMapService<Owner, Long> implements 
     }
 
     @Override
-    public List<Owner> findAllByLastName(String anyString) {
-        return null;
+    public List<Owner> findAllByLastNameLike(String anyString) {
+        return new ArrayList<>();
     }
 }

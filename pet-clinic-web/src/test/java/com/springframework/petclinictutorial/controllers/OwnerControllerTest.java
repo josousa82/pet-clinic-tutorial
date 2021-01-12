@@ -91,21 +91,21 @@ class OwnerControllerTest {
     @Test
     void processFindFormReturnMany() throws Exception{
 
-        when(ownerService.findAllByLastName(anyString())).thenReturn(List.of(owner1, owner2));
+        when(ownerService.findAllByLastNameLike(anyString())).thenReturn(List.of(owner1, owner2));
         mockMvc.perform(get("/owners/owners"))
                .andExpect(status().isOk())
                .andExpect(view().name("owners/ownersList"))
                .andExpect(model().attribute("selections", hasSize(2)));
-        verify(ownerService, times(1)).findAllByLastName(anyString());
+        verify(ownerService, times(1)).findAllByLastNameLike(anyString());
     }
 
     @Test
     void processFindFormReturnOne() throws Exception{
-        when(ownerService.findAllByLastName(anyString())).thenReturn(List.of(owner1));
+        when(ownerService.findAllByLastNameLike(anyString())).thenReturn(List.of(owner1));
         mockMvc.perform(get("/owners/owners"))
                .andExpect(status().is3xxRedirection())
                .andExpect(view().name("redirect:/owners/1"));
-        verify(ownerService, times(1)).findAllByLastName(anyString());
+        verify(ownerService, times(1)).findAllByLastNameLike(anyString());
     }
 
 

@@ -1,6 +1,8 @@
 package com.springframework.petclinictutorial.model.repositories;
 
 import com.springframework.petclinictutorial.model.Owner;
+import org.hibernate.annotations.NamedQuery;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
