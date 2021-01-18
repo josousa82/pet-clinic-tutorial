@@ -50,7 +50,7 @@ public class OwnerController {
 
         if (owners.isEmpty()){
             bindingResult.rejectValue("lastName", "notFound", "Not found");
-            return "owners/findOwners";
+            return "/owners/findOwners";
 
         }else if (owners.size() == 1){
             owner = owners.iterator().next();
@@ -74,4 +74,5 @@ public class OwnerController {
         mav.addObject(ownerService.findById(ownerId));
         return mav;
     }
+
 }

@@ -14,11 +14,9 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 import static org.hamcrest.Matchers.*;
 import static org.mockito.ArgumentMatchers.anyLong;
-import static org.mockito.ArgumentMatchers.isNotNull;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -108,5 +106,13 @@ class OwnerControllerTest {
         verify(ownerService, times(1)).findAllByLastNameLike(anyString());
     }
 
+    @Test
+    void processFindFormReturnZeroElements() throws Exception{
+        when(ownerService.findAllByLastNameLike(anyString())).thenReturn(Collections.EMPTY_LIST);
+        mockMvc.perform(get("/owners/owners"))
+               .andExpect(status().isOk())
+               .andExpect(view().name("/owners/findOwners"));
+        verify(ownerService, times(1)).findAllByLastNameLike(anyString());
+    }
 
 }
