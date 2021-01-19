@@ -45,6 +45,23 @@ public class Owner extends Person {
     private Set<Pet> pets = new HashSet<>();
 
     public void addPet(Pet pet){
+        if (pets == null)
+            pets = new HashSet<>();
         this.pets.add(pet);
+    }
+
+    public Pet getPet(String name){
+        return getPet(name, false);
+    }
+
+    public Pet getPet(String name, boolean ignoreNew){
+        for (Pet pet : pets) {
+            if (!ignoreNew || !pet.isNew()) {
+                if (pet.getName().equalsIgnoreCase(name)) {
+                    return pet;
+                }
+            }
+        }
+        return null;
     }
 }

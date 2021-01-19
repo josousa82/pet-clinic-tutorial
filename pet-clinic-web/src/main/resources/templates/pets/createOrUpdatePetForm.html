@@ -2,7 +2,7 @@
 <html lang="en" th:replace="~{fragments/layout :: layout (~{::body},'owners')}" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title><th:block th:if="${pet['new']}">Add New Pet</th:block>Update Pet</title>
+<!--    <title><th:block th:if="${pet['new']}">Add New Pet</th:block>Update Pet</title>-->
 </head>
 <body>
 <!--/*thymesVar id= "owner" type ="com.springframework.petclinictutorial.model.Owner"*/-->
@@ -11,7 +11,7 @@
 
 <h2><th:block th:if="${pet['new']}">New</th:block>Pet</h2>
 
-<form class="form-horizontal" id="add-owner-form" method="post" th:object="${owner}">
+<form class="form-horizontal" id="add-owner-form" method="post" th:object="${pet}">
     <div class="form-group has-feedback">
         <div class="form-group">
             <label class="col-sm-2 control-label">Owner</label>
