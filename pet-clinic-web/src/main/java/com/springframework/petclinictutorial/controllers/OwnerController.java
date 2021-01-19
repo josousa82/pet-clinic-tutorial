@@ -2,27 +2,26 @@ package com.springframework.petclinictutorial.controllers;
 
 import com.springframework.petclinictutorial.model.Owner;
 import com.springframework.petclinictutorial.services.OwnerService;
+import org.dom4j.rule.Mode;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 import java.util.Objects;
+import javax.validation.Valid;
 
 /**
  * Created by sousaJ on 29/08/2020
  * in package - com.springframework.petclinictutorial.controllers
  **/
 @Controller
-@RequestMapping("/owners")
 public class OwnerController {
 
+    private static final String VIEW_OWNER_CREATE_UPDATE_FORM = "/owners/createOrUpdateOwnerForm";
     private final OwnerService ownerService;
 
     public OwnerController(OwnerService ownerService) {
@@ -34,13 +33,27 @@ public class OwnerController {
         dataBinder.setDisallowedFields("id");
     }
 
-    @GetMapping(value = {"", "/","/index", "/index.html"})
+    @GetMapping(value = { "/owners/","/owners/index", "/owners/index.html"})
     public String listOwners(Model model){
         model.addAttribute("owners", ownerService.findAll());
         return "owners/index";
     }
 
-    @GetMapping("/owners")
+    @GetMapping({"/owners/find"})
+    public String findOwners(Model model){
+        model.addAttribute("owner",Owner.builder().build());
+        return "owners/findOwners";
+    }
+
+    @GetMapping("/owners/{ownerId}")
+    public ModelAndView getOwnerDetailsById(@PathVariable("ownerId") Long ownerId){
+        ModelAndView mav = new ModelAndView("owners/ownerDetails");
+        mav.addObject(ownerService.findById(ownerId));
+        return mav;
+    }
+
+
+    @GetMapping("/owners/getByLastName")
     public String processFindForm(Owner owner, BindingResult bindingResult, Model model){
         if(Objects.isNull(owner.getLastName())){
             owner.setLastName("");
@@ -62,17 +75,35 @@ public class OwnerController {
         }
     }
 
-    @GetMapping({"/find"})
-    public String findOwners(Model model){
-        model.addAttribute("owner",Owner.builder().build());
-        return "owners/findOwners";
+    @GetMapping("/owners/new")
+    public String initCreationForm(Model model){
+       model.addAttribute("owner", Owner.builder().build());
+       return VIEW_OWNER_CREATE_UPDATE_FORM;
     }
 
-    @GetMapping("/{ownerId}")
-    public ModelAndView getOwnerDetails(@PathVariable("ownerId") Long ownerId){
-        ModelAndView mav = new ModelAndView("owners/ownerDetails");
-        mav.addObject(ownerService.findById(ownerId));
-        return mav;
+    @PostMapping("/owners/new")
+    public String processCreationForm(@Valid Owner owner, BindingResult result){
+        if (result.hasErrors()) {
+            return VIEW_OWNER_CREATE_UPDATE_FORM;
+        } else {
+           Owner savedOwner = ownerService.save(owner);
+            return "redirect:/owners/" + savedOwner.getId();
+        }
+    }
+    @GetMapping("/owners/{ownerId}/edit")
+    public String initUpdateOwnerForm(@PathVariable("ownerId") Long ownerId, Model model){
+        model.addAttribute(ownerService.findById(ownerId));
+        return VIEW_OWNER_CREATE_UPDATE_FORM;
     }
 
+    @PostMapping("owners/{ownerId}/edit")
+    public String processUpdateOwner(@Valid Owner owner, @PathVariable("ownerId") Long ownerId, BindingResult bindingResult){
+        if (bindingResult.hasErrors()){
+            return VIEW_OWNER_CREATE_UPDATE_FORM;
+        }else {
+            owner.setId(ownerId);
+            Owner savedOwner = ownerService.save(owner);
+            return "redirect:/owners/" + savedOwner.getId();
+        }
+    }
 }

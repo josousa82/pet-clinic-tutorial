@@ -9,7 +9,7 @@
 <h2>Find Owners</h2>
 
 <form class="form-horizontal" id="search-owner-form" method="get"
-      th:action="@{/owners/owners}" th:object="${owner}">
+      th:action="@{/owners/getByLastName}" th:object="${owner}">
     <div class="form-group">
         <div class="control-group" id="lastNameGroup">
             <label class="col-sm-2 control-label">Last name </label>
@@ -24,15 +24,15 @@
     </div>
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
-            <button class="btn btn-default" type="submit">Find
-                Owner</button>
+            <button class="btn btn-primary" type="submit">Find Owner</button>
+            <a class="btn btn-primary" th:href="@{/owners/new}">Add Owner</a>
         </div>
     </div>
 
 </form>
 
 <br />
-<a class="btn btn-default" th:href="@{/owners/new}">Add Owner</a>
+
 
 </body>
 </html>
