@@ -9,15 +9,23 @@
 <!--/*thymesVar id= "pet" type ="com.springframework.petclinictutorial.model.Pet"*/-->
 
 
-<h2><th:block th:if="${pet['new']}">New</th:block>Pet</h2>
+<h2><th:block th:if="${pet['new']}">New</th:block> Pet</h2>
 
 <form class="form-horizontal" id="add-owner-form" method="post" th:object="${pet}">
     <div class="form-group has-feedback">
         <div class="form-group">
+            <th:block th:if="${not pet['new']}">
             <label class="col-sm-2 control-label">Owner</label>
             <div class="col-sm-10">
-                <span th:text="${pet.owner?.firstName + ' ' + pet.owner?.lastName}" />
+                <span th:text="${owner?.firstName + ' ' + owner?.lastName}" />
             </div>
+            </th:block>
+            <th:block th:if="${pet['new']}">
+                <label class="col-sm-2 control-label">Owner</label>
+                <div class="col-sm-10">
+                    <span th:text="${pet.owner?.firstName + ' ' + pet.owner?.lastName}" />
+                </div>
+            </th:block>
         </div>
         <input th:replace="~{fragments/inputField :: input ('Name', 'name', 'text')}"/>
         <input th:replace="~{fragments/inputField :: input ('Type', 'petType', ${types})}"/>
