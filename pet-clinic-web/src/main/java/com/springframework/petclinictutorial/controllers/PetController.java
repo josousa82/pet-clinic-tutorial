@@ -1,4 +1,4 @@
-package com.springframework.petclinictutorial.controllers.restControllers;
+package com.springframework.petclinictutorial.controllers;
 
 import com.springframework.petclinictutorial.model.Owner;
 import com.springframework.petclinictutorial.model.Pet;
@@ -54,8 +54,9 @@ public class PetController {
 
     @GetMapping("/pets/new")
     public String initCreatePetForm(Owner owner, Model model){
-        Pet pet = Pet.builder().owner(owner).build();
+        Pet pet = Pet.builder().build();
         owner.addPet(pet);
+        pet.setOwner(owner);
         model.addAttribute("pet", pet);
         return VIEW_PETS_CREATE_OR_UPDATE_FORM;
     }
@@ -64,7 +65,7 @@ public class PetController {
     public String processCreationFormPet(Owner owner, @Valid Pet pet, BindingResult result, Model model){
         if(StringUtils.hasLength(pet.getName()) && Objects.nonNull(owner.getPet(pet.getName(), true)))
             result.rejectValue("name", "duplicate", "already exists");
-        owner.addPet(pet);
+            owner.addPet(pet);
         if (result.hasErrors()){
             model.addAttribute("pet", pet);
             return VIEW_PETS_CREATE_OR_UPDATE_FORM;

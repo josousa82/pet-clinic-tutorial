@@ -55,4 +55,9 @@ public class Pet extends BaseEntity {
     public void addVisit(Visit visit){
         this.visits.add(visit);
     }
+
+    @Override
+    public void setId(Long id) {
+        super.setId(id);
+    }
 }

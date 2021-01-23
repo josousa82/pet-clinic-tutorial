@@ -1,6 +1,5 @@
 package com.springframework.petclinictutorial.controllers;
 
-import com.springframework.petclinictutorial.controllers.restControllers.PetController;
 import com.springframework.petclinictutorial.model.Owner;
 import com.springframework.petclinictutorial.model.Pet;
 import com.springframework.petclinictutorial.model.PetType;

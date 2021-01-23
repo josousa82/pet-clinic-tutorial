@@ -26,4 +26,9 @@ public class PetType extends BaseEntity {
 
     @Column(name = "name")
     private String name;
+
+    @Override
+    public void setId(Long id) {
+        super.setId(id);
+    }
 }
