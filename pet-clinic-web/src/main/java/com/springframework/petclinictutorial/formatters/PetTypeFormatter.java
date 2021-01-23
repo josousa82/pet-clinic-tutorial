@@ -16,14 +16,10 @@ import java.util.Locale;
  * in package - com.springframework.petclinictutorial.formatters
  **/
 @Component
-//@RequiredArgsConstructor(onConstructor = @__(@Autowired))
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class PetTypeFormatter implements Formatter<PetType> {
 
     private final PetTypeService petTypeService;
-
-    public PetTypeFormatter(PetTypeService petTypeService) {
-        this.petTypeService = petTypeService;
-    }
 
     @Override
     public String print(PetType petType, Locale locale) {

@@ -6,6 +6,9 @@ import com.springframework.petclinictutorial.model.PetType;
 import com.springframework.petclinictutorial.services.OwnerService;
 import com.springframework.petclinictutorial.services.PetService;
 import com.springframework.petclinictutorial.services.PetTypeService;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.core.convert.ConversionService;
+import org.springframework.core.convert.support.DefaultConversionService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -66,6 +69,7 @@ public class PetController {
         if(StringUtils.hasLength(pet.getName()) && Objects.nonNull(owner.getPet(pet.getName(), true)))
             result.rejectValue("name", "duplicate", "already exists");
             owner.addPet(pet);
+            pet.setOwner(owner);
         if (result.hasErrors()){
             model.addAttribute("pet", pet);
             return VIEW_PETS_CREATE_OR_UPDATE_FORM;
@@ -84,6 +88,7 @@ public class PetController {
     @PostMapping("/pets/{petId}/edit")
     public String processUpdatePetForm(@Valid Pet pet, BindingResult result, Owner owner, Model model){
         if(result.hasErrors()){
+            // TODO fix implementation for update method. saving additional pet instead of updating the current one
             pet.setOwner(owner);
             model.addAttribute("pet", pet);
             return  VIEW_PETS_CREATE_OR_UPDATE_FORM;

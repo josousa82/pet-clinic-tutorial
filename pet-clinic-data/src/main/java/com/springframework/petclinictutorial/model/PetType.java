@@ -14,6 +14,7 @@ import javax.persistence.Table;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode
 @Entity
 @Table(name = "types")
 public class PetType extends BaseEntity {
@@ -30,5 +31,9 @@ public class PetType extends BaseEntity {
     @Override
     public void setId(Long id) {
         super.setId(id);
+    }
+
+    public String toString() {
+        return this.getName();
     }
 }
