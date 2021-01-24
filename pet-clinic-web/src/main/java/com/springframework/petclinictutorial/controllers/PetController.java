@@ -6,9 +6,8 @@ import com.springframework.petclinictutorial.model.PetType;
 import com.springframework.petclinictutorial.services.OwnerService;
 import com.springframework.petclinictutorial.services.PetService;
 import com.springframework.petclinictutorial.services.PetTypeService;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.core.convert.ConversionService;
-import org.springframework.core.convert.support.DefaultConversionService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -18,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.Collection;
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -26,6 +26,7 @@ import java.util.Objects;
  **/
 @Controller
 @RequestMapping("/owners/{ownerId}")
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class PetController {
 
     private static final String VIEW_PETS_CREATE_OR_UPDATE_FORM = "pets/createOrUpdatePetForm";
@@ -34,11 +35,6 @@ public class PetController {
     private final PetTypeService petTypeService;
     private final OwnerService ownerService;
 
-    public PetController(PetService petService, PetTypeService petTypeService, OwnerService ownerService) {
-        this.petService = petService;
-        this.petTypeService = petTypeService;
-        this.ownerService = ownerService;
-    }
 
     @ModelAttribute("types")
     public Collection<PetType> populatePetTypes(){
@@ -82,20 +78,20 @@ public class PetController {
     @GetMapping("/pets/{petId}/edit")
     public String initUpdatePetForm(@PathVariable Long petId, Model model){
         model.addAttribute("pet", petService.findById(petId));
+        model.addAttribute("petId", petService.findById(petId).getId());
         return VIEW_PETS_CREATE_OR_UPDATE_FORM;
     }
 
     @PostMapping("/pets/{petId}/edit")
-    public String processUpdatePetForm(@Valid Pet pet, BindingResult result, Owner owner, Model model){
+    public String processUpdatePetForm(@Valid Pet pet, @PathVariable Map<String,String> val, BindingResult result, Owner owner, Model model){
         if(result.hasErrors()){
-            // TODO fix implementation for update method. saving additional pet instead of updating the current one
             pet.setOwner(owner);
             model.addAttribute("pet", pet);
             return  VIEW_PETS_CREATE_OR_UPDATE_FORM;
         } else {
-            owner.getPets().add(pet);
-            petService.save(pet);
+            petService.update(pet, Long.parseLong(val.get("petId")));
             return "redirect:/owners/" + owner.getId();
         }
     }
+
 }

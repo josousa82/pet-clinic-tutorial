@@ -6,8 +6,6 @@ import com.springframework.petclinictutorial.services.SpecialityService;
 import com.springframework.petclinictutorial.services.VetService;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -35,7 +33,7 @@ public class VetMapService extends AbstractMapService<Vet, Long> implements VetS
 
     @Override
     public Vet save(Vet object) {
-        if(object.getSpecialties().size() > 0){
+        if(!object.getSpecialties().isEmpty()){
             object.getSpecialties().forEach(specialty -> {
                 if(Objects.isNull(specialty.getId())){
                     Specialty savedSpecialty = specialityService.save(specialty);
@@ -55,6 +53,11 @@ public class VetMapService extends AbstractMapService<Vet, Long> implements VetS
     @Override
     public void deleteById(Long id) {
         super.deleteById(id);
+    }
+
+    @Override
+    public Vet update(Vet object, Long aLong) {
+        return null;
     }
 
     @Override

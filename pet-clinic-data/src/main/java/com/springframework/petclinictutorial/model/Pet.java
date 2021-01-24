@@ -1,6 +1,7 @@
 package com.springframework.petclinictutorial.model;
 
 import lombok.*;
+import lombok.experimental.Accessors;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -16,6 +17,7 @@ import java.util.Set;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
+@Accessors(chain  = true)
 @Entity
 @Table(name = "pets")
 public class Pet extends BaseEntity {
@@ -56,8 +58,4 @@ public class Pet extends BaseEntity {
         this.visits.add(visit);
     }
 
-    @Override
-    public void setId(Long id) {
-        super.setId(id);
-    }
 }

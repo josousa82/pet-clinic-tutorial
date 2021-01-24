@@ -50,4 +50,9 @@ public class VisitSDJpaService implements VisitService {
     public void deleteById(Long id) {
         visitRepository.deleteById(id);
     }
+
+    @Override
+    public Visit update(Visit object, Long aLong) {
+        return null;
+    }
 }

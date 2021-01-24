@@ -40,6 +40,7 @@ public abstract class AbstractMapService<T extends BaseEntity, ID extends Long> 
         map.entrySet().removeIf(entry -> entry.getValue().equals(object));
     }
 
+    //TODO implement abstract update method
 
     private Long getNextId(){
         Long nextId = null;

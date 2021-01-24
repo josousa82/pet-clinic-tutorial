@@ -2,7 +2,8 @@ package com.springframework.petclinictutorial.controllers;
 
 import com.springframework.petclinictutorial.model.Owner;
 import com.springframework.petclinictutorial.services.OwnerService;
-import org.dom4j.rule.Mode;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -19,14 +20,12 @@ import javax.validation.Valid;
  * in package - com.springframework.petclinictutorial.controllers
  **/
 @Controller
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class OwnerController {
 
     private static final String VIEW_OWNER_CREATE_UPDATE_FORM = "/owners/createOrUpdateOwnerForm";
+    public static final String  VIEW_REDIRECT_OWNERS = "redirect:/owners/";
     private final OwnerService ownerService;
-
-    public OwnerController(OwnerService ownerService) {
-        this.ownerService = ownerService;
-    }
 
     @InitBinder
     public void dataBinder(WebDataBinder dataBinder){
@@ -67,7 +66,7 @@ public class OwnerController {
 
         }else if (owners.size() == 1){
             owner = owners.iterator().next();
-            return "redirect:/owners/" + owner.getId();
+            return VIEW_REDIRECT_OWNERS + owner.getId();
 
         }else {
             model.addAttribute("selections", owners);

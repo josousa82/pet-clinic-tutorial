@@ -2,7 +2,10 @@ package com.springframework.petclinictutorial.controllers.restControllers;
 
 import com.springframework.petclinictutorial.model.Owner;
 import com.springframework.petclinictutorial.services.OwnerService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,15 +20,12 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
  **/
 @RestController
 @RequestMapping("/restOwners")
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class RestOwnerController {
 
     private final OwnerService ownerService;
 
-    public RestOwnerController(OwnerService ownerService) {
-        this.ownerService = ownerService;
-    }
-
-    @RequestMapping(value = "/getOwners", method = GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/getOwners", produces = MediaType.APPLICATION_JSON_VALUE)
     public Set<Owner> getOwnersList(){
         return ownerService.findAll();
     }

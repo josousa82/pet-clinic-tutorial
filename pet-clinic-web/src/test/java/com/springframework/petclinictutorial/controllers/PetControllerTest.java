@@ -50,7 +50,7 @@ public class PetControllerTest {
 
     @BeforeEach
     void setUp() {
-        owner = Owner.builder().id(1l).build();
+        owner = Owner.builder().id(1L).build();
 
         petTypes = new HashSet<>();
         petTypes.add(PetType.builder().id(1L).name("Dog").build());
@@ -95,6 +95,7 @@ public class PetControllerTest {
                .andExpect(status().isOk())
                .andExpect(model().attributeExists("owner"))
                .andExpect(model().attributeExists("pet"))
+               .andExpect(model().attributeExists("petId"))
                .andExpect(view().name("pets/createOrUpdatePetForm"));
     }
 
@@ -107,7 +108,7 @@ public class PetControllerTest {
                .andExpect(status().is3xxRedirection())
                .andExpect(view().name("redirect:/owners/1"));
 
-        verify(petService).save(any());
+        verify(petService).update(any(), any());
     }
 
 //    @Test

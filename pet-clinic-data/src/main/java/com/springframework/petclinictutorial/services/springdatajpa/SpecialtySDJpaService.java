@@ -50,4 +50,9 @@ public class SpecialtySDJpaService implements SpecialityService {
     public void deleteById(Long id) {
         specialtyRepository.deleteById(id);
     }
+
+    @Override
+    public Specialty update(Specialty object, Long aLong) {
+        return null;
+    }
 }

@@ -2,7 +2,9 @@ package com.springframework.petclinictutorial.bootstrap;
 
 import com.springframework.petclinictutorial.model.*;
 import com.springframework.petclinictutorial.services.*;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
@@ -17,6 +19,7 @@ import java.time.LocalDate;
 @Slf4j
 @Component
 @Profile({"springdatajpa", "default", "map"})
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class DataLoader implements CommandLineRunner {
 
     private final OwnerService ownerService;
@@ -24,14 +27,6 @@ public class DataLoader implements CommandLineRunner {
     private final PetTypeService petTypeService;
     private final VisitService visitService;
     private final SpecialityService specialityService;
-
-    public DataLoader(OwnerService ownerService, VetService vetService, PetTypeService petTypeService, VisitService visitService, SpecialityService specialityService) {
-        this.ownerService = ownerService;
-        this.vetService = vetService;
-        this.petTypeService = petTypeService;
-        this.specialityService = specialityService;
-        this.visitService = visitService;
-    }
 
 
     @Override

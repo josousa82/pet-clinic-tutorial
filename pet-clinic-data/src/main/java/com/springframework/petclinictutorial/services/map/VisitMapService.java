@@ -28,6 +28,11 @@ public class VisitMapService extends AbstractMapService<Visit, Long> implements 
     }
 
     @Override
+    public Visit update(Visit object, Long aLong) {
+        return null;
+    }
+
+    @Override
     public void delete(Visit visit) {
         super.delete(visit);
     }

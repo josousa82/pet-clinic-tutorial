@@ -38,12 +38,19 @@ public class OwnerMapService extends AbstractMapService<Owner, Long> implements 
     }
 
     @Override
+    public Owner update(Owner object, Long aLong) {
+        return null;
+    }
+
+    @Override
     public void delete(Owner object) {
         super.delete(object);
     }
 
     @Override
     public Owner save(Owner object) {
+
+        //TODO refactor complexity
         if(Objects.nonNull(object)) {
             if (Objects.nonNull(object.getPets())) {
                 object.getPets().forEach(pet -> {
@@ -52,6 +59,7 @@ public class OwnerMapService extends AbstractMapService<Owner, Long> implements 
                             pet.setPetType(petTypeService.save(pet.getPetType()));
                         }
                     }else {
+                        //TODO custom exception
                         throw new RuntimeException("Pet type is required");
                     }
 
