@@ -1,5 +1,6 @@
 package com.springframework.petclinictutorial.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 import lombok.experimental.Accessors;
 
@@ -38,6 +39,7 @@ public class Pet extends BaseEntity {
     @Column(name = "name")
     private String name;
 
+
     @ManyToOne
     @JoinColumn(name = "type_id")
     private PetType petType;
@@ -50,6 +52,7 @@ public class Pet extends BaseEntity {
     @Column(name = "birth_date")
     private LocalDate birthDate;
 
+    @JsonBackReference
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "pet")
     private Set<Visit> visits = new HashSet<>();
 

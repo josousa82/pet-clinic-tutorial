@@ -1,5 +1,7 @@
 package com.springframework.petclinictutorial.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 import lombok.experimental.Accessors;
 import lombok.experimental.SuperBuilder;
@@ -41,6 +43,8 @@ public class Owner extends Person {
     @Column(name = "telephone")
     private String telephone;
 
+//    @Getter(onMethod = @__( @JsonIgnore))
+//    @JsonManagedReference
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
     private Set<Pet> pets = new HashSet<>();
 

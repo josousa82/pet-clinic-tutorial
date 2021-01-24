@@ -1,5 +1,6 @@
 package com.springframework.petclinictutorial.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 
 import javax.persistence.Column;
@@ -14,7 +15,7 @@ import javax.persistence.Table;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode
+@EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "types")
 public class PetType extends BaseEntity {
@@ -24,14 +25,8 @@ public class PetType extends BaseEntity {
         super(id);
         this.name = name;
     }
-
     @Column(name = "name")
     private String name;
-
-    @Override
-    public void setId(Long id) {
-        super.setId(id);
-    }
 
     public String toString() {
         return this.getName();
