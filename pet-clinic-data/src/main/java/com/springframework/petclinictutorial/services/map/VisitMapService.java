@@ -4,6 +4,7 @@ import com.springframework.petclinictutorial.model.Visit;
 import com.springframework.petclinictutorial.services.VisitService;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import java.util.HashSet;
 import java.util.Objects;
@@ -29,6 +30,7 @@ public class VisitMapService extends AbstractMapService<Visit, Long> implements 
 
     @Override
     public Visit update(Visit object, Long aLong) {
+        // TODO implement method
         return null;
     }
 
@@ -51,5 +53,10 @@ public class VisitMapService extends AbstractMapService<Visit, Long> implements 
     @Override
     public Visit findById(Long id) {
         return super.findById(id);
+    }
+
+    @Override
+    public void addNewVisit(Visit visit, Model model) {
+        // TODO implement method
     }
 }
