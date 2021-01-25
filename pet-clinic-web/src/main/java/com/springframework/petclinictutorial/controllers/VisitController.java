@@ -34,9 +34,8 @@ public class VisitController {
     @ModelAttribute("visit")
     public Visit loadPetWithVisit(@PathVariable("petId") Long petId, Model model){
         Pet pet = this.petService.findById(petId);
-        model.addAttribute("pet", pet);
         Visit visit = new Visit();
-        pet.addVisit(visit);
+        model.addAttribute("pet", pet);
         return visit;
     }
 

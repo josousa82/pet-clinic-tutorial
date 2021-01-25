@@ -5,6 +5,8 @@ import com.springframework.petclinictutorial.model.Visit;
 import com.springframework.petclinictutorial.model.repositories.VisitRepository;
 import com.springframework.petclinictutorial.services.PetService;
 import com.springframework.petclinictutorial.services.VisitService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
@@ -19,15 +21,11 @@ import java.util.Set;
 
 @Service
 @Profile("springdatajpa")
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class VisitSDJpaService implements VisitService {
 
     private final VisitRepository visitRepository;
     private final PetService petService;
-
-    public VisitSDJpaService(VisitRepository visitRepository, PetService petService) {
-        this.visitRepository = visitRepository;
-        this.petService = petService;
-    }
 
     @Override
     public Set<Visit> findAll() {
