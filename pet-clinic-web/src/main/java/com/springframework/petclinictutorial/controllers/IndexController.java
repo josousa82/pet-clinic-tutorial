@@ -25,6 +25,6 @@ public class IndexController {
 
     @RequestMapping({"/oups"})
     public String errorMenu(){
-        return "not_implemented";
+        return "/errors/error404";
     }
 }
