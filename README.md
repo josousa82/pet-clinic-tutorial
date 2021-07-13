@@ -9,17 +9,19 @@ These instructions will get you a copy of the project up and running on your loc
 ### Prerequisites
 
 - Maven
-- Java 11
-- Spring Boot
+- Java 15
+- Spring Boot 2.4.6
 - IntelliJ IDE 
 
 ## Build Status
 
+#### Code Quality
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/e0720f21fc8640288e0896c495e46c49)](https://app.codacy.com/gh/josousa82/pet-clinic-tutorial?utm_source=github.com&utm_medium=referral&utm_content=josousa82/pet-clinic-tutorial&utm_campaign=Badge_Grade_Settings)
+* [![Codacy Badge](https://app.codacy.com/project/badge/Grade/31c64005345449148652d57b8969a67c)](https://www.codacy.com/manual/josousa82/pet-clinic-tutorial/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=josousa82/pet-clinic-tutorial&amp;utm_campaign=Badge_Grade)
+
 #### CircleCI
 * [![<CircleCI>](https://circleci.com/gh/josousa82/pet-clinic-tutorial.svg?style=shield)](https://circleci.com/gh/josousa82/pet-clinic-tutorial)
-  
-#### TravisCI
-* [![Build Status](https://travis-ci.com/josousa82/pet-clinic-tutorial.svg?branch=master)](https://travis-ci.com/josousa82/pet-clinic-tutorial)  
+
     
 ### Installing
 
