@@ -12,6 +12,7 @@ jobs:
 
     steps:
       - checkout
+      - run: java --version
 
       - restore_cache:
           keys:
