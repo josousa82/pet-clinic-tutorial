@@ -1,6 +1,15 @@
-version: 2
+version: 2.1
 
-jobs:
+#jobs:
+commands:
+  check_sonar_init_command:
+    description: "Searches for [init sonar] message in commit message. If it exists then create file /tmp/sonar_init"
+    steps:
+      - run:
+          name: Checking for [init sonar] message
+          command: |
+            COMMIT_MESSAGE=$(git log --format=oneline -n 1 $CIRCLE_SHA1)
+            echo ${COMMIT_MESSAGE} | grep -q "\[init sonar\]" && touch /tmp/sonar_init || true
   build:
     docker:
       - image: cimg/openjdk:15.0.2
