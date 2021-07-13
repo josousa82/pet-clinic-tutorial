@@ -146,4 +146,7 @@ Desktop.ini
 /logs/
 /.mvn/
 /pet-clinic-web/target/
+/pet-clinic-web/target/maven-status/
 /pet-clinic-data/target/
+/pet-clinic-data/target/maven-status/
+
