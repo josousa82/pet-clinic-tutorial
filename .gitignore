@@ -68,7 +68,7 @@ local.properties
 # Maven
 ######################
 /log/
-/target/
+target/
 
 ######################
 # Gradle
@@ -145,3 +145,4 @@ Desktop.ini
 !.elasticbeanstalk/*.global.yml
 /logs/
 /.mvn/
+/pet-clinic-web/target/

@@ -9,8 +9,8 @@ These instructions will get you a copy of the project up and running on your loc
 ### Prerequisites
 
 - Maven
-- Java 11
-- Spring Boot
+- Java 15
+- Spring Boot 2.4.6
 - IntelliJ IDE 
 
 ## Build Status
@@ -20,9 +20,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 #### CircleCI
 * [![<CircleCI>](https://circleci.com/gh/josousa82/pet-clinic-tutorial.svg?style=shield)](https://circleci.com/gh/josousa82/pet-clinic-tutorial)
-  
-#### TravisCI
-* [![Build Status](https://travis-ci.com/josousa82/pet-clinic-tutorial.svg?branch=master)](https://travis-ci.com/josousa82/pet-clinic-tutorial)  
+
     
 ### Installing
 
