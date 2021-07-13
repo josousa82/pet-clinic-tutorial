@@ -16,7 +16,7 @@ These instructions will get you a copy of the project up and running on your loc
 ## Build Status
 
 #### Code Quality
-* [![Codacy Badge](https://app.codacy.com/project/badge/Grade/31c64005345449148652d57b8969a67c)](https://www.codacy.com/manual/josousa82/pet-clinic-tutorial/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=josousa82/pet-clinic-tutorial&amp;utm_campaign=Badge_Grade)
+* [![Codacy Badge](https://app.codacy.com/project/badge/Grade/c04274c09e65430eb110cda6db0fb219)](https://www.codacy.com/gh/josousa82/pet-clinic-tutorial/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=josousa82/pet-clinic-tutorial&amp;utm_campaign=Badge_Grade)
 
 #### CircleCI
 * [![<CircleCI>](https://circleci.com/gh/josousa82/pet-clinic-tutorial.svg?style=shield)](https://circleci.com/gh/josousa82/pet-clinic-tutorial)
