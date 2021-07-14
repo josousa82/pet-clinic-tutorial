@@ -10,8 +10,11 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+
+import java.time.LocalDate;
 
 import static org.hamcrest.Matchers.*;
 import static org.mockito.ArgumentMatchers.anyLong;
@@ -70,7 +73,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
         when(petService.findById(anyLong())).thenReturn(pet);
 
-        mockMvc.perform(post("/owners/1/pets/1/visits/new"))
+        mockMvc.perform(post("/owners/1/pets/1/visits/new")
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                .param("date", LocalDate.now().plusDays(5L).toString())
+                .param("description", "Visit description"))
                .andExpect(status().is3xxRedirection())
                .andExpect(view().name("redirect:/owners/1"))
                .andExpect(model().attribute("pet", hasProperty("visits", hasSize(1))));

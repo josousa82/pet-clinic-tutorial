@@ -16,6 +16,8 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.beans.PropertyEditorSupport;
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Objects;
@@ -49,6 +51,12 @@ public class PetController {
     @InitBinder("owner")
     public void initOwnerBinder(WebDataBinder webDataBinder){
         webDataBinder.setDisallowedFields("id");
+        webDataBinder.registerCustomEditor(LocalDate.class, new PropertyEditorSupport() {
+            @Override
+            public void setAsText(String text) throws IllegalArgumentException {
+                setValue(LocalDate.parse(text));
+            }
+        });
     }
 
     @GetMapping("/pets/new")
