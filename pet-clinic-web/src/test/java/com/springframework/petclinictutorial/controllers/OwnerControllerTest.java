@@ -107,7 +107,7 @@ class OwnerControllerTest {
 
     @Test
     void processFindFormReturnZeroElements() throws Exception{
-        when(ownerService.findAllByLastNameLike(anyString())).thenReturn(Collections.EMPTY_LIST);
+        when(ownerService.findAllByLastNameLike(anyString())).thenReturn(Collections.emptyList());
         mockMvc.perform(get("/owners/getByLastName"))
                .andExpect(status().isOk())
                .andExpect(view().name("/owners/findOwners"));
