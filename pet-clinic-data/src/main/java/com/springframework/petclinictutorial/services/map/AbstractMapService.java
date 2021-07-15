@@ -33,16 +33,18 @@ public abstract class AbstractMapService<T extends BaseEntity, ID extends Long> 
 
 
     void deleteById(ID id){
+        // TODO Implement check for wrong ID and throw invalid id custom exception, Not Found
         map.remove(id);
     }
 
     void delete(T object){
+        // TODO Implement check for object with wrong ID and throw Not found exception
         map.entrySet().removeIf(entry -> entry.getValue().equals(object));
     }
 
     //TODO implement abstract update method
 
-    private Long getNextId(){
+    protected Long getNextId(){
         Long nextId = null;
         try{
             nextId = Collections.max(map.keySet()) + 1;
