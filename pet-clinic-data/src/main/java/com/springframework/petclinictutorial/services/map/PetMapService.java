@@ -5,7 +5,9 @@ import com.springframework.petclinictutorial.services.PetService;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
+import java.security.InvalidParameterException;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -31,7 +33,11 @@ public class PetMapService extends AbstractMapService<Pet, Long> implements PetS
 
     @Override
     public Pet save(Pet object) {
-        return super.save(object);
+        if (Objects.nonNull(object)) {
+            return super.save(object);
+        } else {
+            throw new InvalidParameterException("Pet must not be null");
+        }
     }
 
     @Override
