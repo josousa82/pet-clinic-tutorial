@@ -6,21 +6,25 @@
 </head>
 <body>
     <!--/*thymesVar id="vets" type ="com.springframework.petclinictutorial.model.Vet"*/-->
-    <h1 th:text="'List of Vets'">List of Vets...</h1>
+    <div class="h4" th:text="'Veterinarians'">List of Vets...</div>
     <table class="table table-striped">
-        <thead>
+        <caption>List of veterinarians and their specialities</caption>
+        <thead class="thead-dark text-light ">
         <tr>
-            <th>Id</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-
+            <th class="font-weight-normal">Name</th>
+            <th class="font-weight-normal">Specialties</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="vet : ${vets}">
-            <td th:text="${vet.id}">1</td>
-            <td th:text="${vet.firstName}">Joe</td>
-            <td th:text="${vet.lastName}">Buck</td>
+            <td th:text="${vet.firstName + ' ' + vet.lastName}"></td>
+            <td>
+                <span th:each="specialty : ${vet.specialties}"
+                      th:text="${specialty.description + ' '}">
+                </span>
+                <span th:if="${vet?.specialties?.size() == 0}">none
+                </span>
+            </td>
         </tr>
         </tbody>
     </table>
